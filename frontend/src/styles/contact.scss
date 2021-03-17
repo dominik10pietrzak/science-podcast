@@ -1,0 +1,208 @@
+@import 'utils';
+
+.contact {
+  padding: 0 $page_padding_x_thin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(18, 19, 20);
+  color: white;
+
+  .heading {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: white;
+
+    &:not(:first-of-type) {
+      margin-top: 3rem;
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    padding: 7rem;
+    padding-bottom: 6rem;
+    background-color: rgb(27, 29, 31);
+    transition: all 0.3s ease;
+
+    .crew {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+
+      .person {
+        width: 50%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.5s ease;
+
+        &.lukasz {
+          transition: all 0.5s ease 0.1s;
+        }
+
+        .person-top {
+          display: flex;
+          position: relative;
+
+          .social-media {
+            width: 2rem;
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            i {
+              margin: 0.25rem 0.15rem;
+              margin-top: 0;
+              color: rgb(97, 106, 109);
+              cursor: pointer;
+
+              &:hover {
+                color: white;
+              }
+            }
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+        }
+
+        .contact-forms {
+          display: flex;
+          flex-direction: column;
+
+          h1 {
+            font-size: 1rem;
+            margin: {
+              top: 1rem;
+              bottom: 0.5rem;
+            }
+            font-weight: 500;
+            text-transform: uppercase;
+          }
+
+          p {
+            width: 20rem;
+            font-size: 0.7rem;
+          }
+
+          i {
+            font-size: 0.8rem;
+            margin-right: 0.75rem;
+            color: $main_cyan;
+            width: 1rem;
+          }
+
+          span {
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+
+  &.contact-hidden {
+    .wrapper {
+      opacity: 0;
+    }
+    .person {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .contact {
+      padding: 0 $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .contact {
+    .wrapper {
+      padding: 2rem;
+      padding-top: 5rem;
+
+      .crew {
+        .person {
+          .contact-forms {
+            i {
+              font-size: 0.7rem;
+              margin-right: 0.25rem;
+            }
+
+            span {
+              font-size: 0.7rem;
+            }
+
+            p {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .contact {
+    padding: 0;
+
+    .heading {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+
+      &:nth-of-type(2) {
+        margin-top: 1rem;
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      padding: 0;
+      padding-top: 5rem;
+      .crew {
+        width: 100%;
+        flex-direction: column;
+
+        .person {
+          width: 100%;
+
+          .contact-forms {
+            i {
+              width: auto;
+            }
+
+            span {
+              font-size: 0.6rem;
+            }
+
+            p {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+.current-weather {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    margin-right: 4rem;
+    text-align: center;
+
+    .temperature {
+      font-size: 4rem;
+      margin: 0 0.25rem;
+      font-weight: bold;
+      display: block;
+    }
+    span {
+      font-weight: lighter;
+      margin: 0.5rem 0;
+    }
+    .description {
+      width: 7rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .location {
+    text-transform: uppercase;
+
+    .city-name {
+      font-size: 2rem;
+      margin: 0.5rem 0;
+    }
+
+    .date {
+      font-weight: lighter;
+    }
+  }
+
+  .weather-conditions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .current-weather {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin: 1.5rem 0;
+
+    .left {
+      width: 100%;
+      margin: 0;
+      margin-top: 1rem;
+
+      .description {
+        width: 100%;
+        justify-content: space-around;
+      }
+    }
+    .location {
+      .city-name {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

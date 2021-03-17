@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e6e340db.chunk.css",
+    "main.js": "/static/js/main.12ead44d.chunk.js",
+    "main.js.map": "/static/js/main.12ead44d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.81e12502.js",
+    "runtime-main.js.map": "/static/js/runtime-main.81e12502.js.map",
+    "static/js/2.b7804af6.chunk.js": "/static/js/2.b7804af6.chunk.js",
+    "static/js/2.b7804af6.chunk.js.map": "/static/js/2.b7804af6.chunk.js.map",
+    "static/js/3.1d1c1a09.chunk.js": "/static/js/3.1d1c1a09.chunk.js",
+    "static/js/3.1d1c1a09.chunk.js.map": "/static/js/3.1d1c1a09.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e6e340db.chunk.css.map": "/static/css/main.e6e340db.chunk.css.map",
+    "static/js/2.b7804af6.chunk.js.LICENSE.txt": "/static/js/2.b7804af6.chunk.js.LICENSE.txt",
+    "static/media/Clear.svg": "/static/media/Clear.3cfa9a96.svg",
+    "static/media/Clear.mp4": "/static/media/Clear.6370ef1e.mp4",
+    "static/media/Clear.jpg": "/static/media/Clear.ac9b5231.jpg",
+    "static/media/Clouds.jpg": "/static/media/Clouds.0d355ba9.jpg",
+    "static/media/Clouds.svg": "/static/media/Clouds.6b4947e0.svg",
+    "static/media/Clouds.mp4": "/static/media/Clouds.7f10d4a8.mp4",
+    "static/media/Rain.mp4": "/static/media/Rain.0b60f3c1.mp4",
+    "static/media/Rain.jpg": "/static/media/Rain.6ae4143e.jpg",
+    "static/media/Rain.svg": "/static/media/Rain.a370fae8.svg",
+    "static/media/Snow.svg": "/static/media/Snow.61be2c0b.svg",
+    "static/media/Snow.jpg": "/static/media/Snow.883b5319.jpg",
+    "static/media/Snow.mp4": "/static/media/Snow.f8cbff6e.mp4",
+    "static/media/Storm.svg": "/static/media/Storm.5c0f0266.svg",
+    "static/media/Storm.mp4": "/static/media/Storm.725b6d59.mp4",
+    "static/media/Thunderstorm.jpg": "/static/media/Thunderstorm.c46a05e0.jpg",
+    "static/media/background-landing.401131fe.jpg": "/static/media/background-landing.401131fe.jpg",
+    "static/media/background-weather-preview.ce087502.jpg": "/static/media/background-weather-preview.ce087502.jpg",
+    "static/media/dominik.e4f5651e.jpg": "/static/media/dominik.e4f5651e.jpg",
+    "static/media/lukasz.e8735326.jpg": "/static/media/lukasz.e8735326.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.81e12502.js",
+    "static/js/2.b7804af6.chunk.js",
+    "static/css/main.e6e340db.chunk.css",
+    "static/js/main.12ead44d.chunk.js"
+  ]
+}

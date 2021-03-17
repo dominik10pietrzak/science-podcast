@@ -1,0 +1,110 @@
+@import 'utils';
+
+.login-register-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15rem;
+  min-height: 100vh;
+  z-index: 0;
+  background: white;
+
+  .login-register-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 22rem;
+    padding: 2rem 3rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    .heading {
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0.5rem;
+    }
+
+    .sign-in-info {
+      text-align: center;
+      padding: 0 1rem;
+      font-size: 0.8rem;
+      margin: 0.5rem 0;
+      color: rgb(150, 155, 156);
+
+      .link-button {
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+          color: rgb(94, 94, 94);
+        }
+      }
+    }
+
+    label {
+      font-size: 0.7rem;
+      margin: 0.25rem 0;
+    }
+
+    input {
+      margin-bottom: 0.8rem;
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      border: solid 2px rgb(145, 145, 145);
+      outline: none;
+      border-radius: 0;
+
+      &:hover {
+        border: solid 2px rgb(0, 0, 0);
+      }
+    }
+
+    button {
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      width: 100%;
+      border: solid 2px black;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: black;
+      color: white;
+      font-family: 'Barlow Condensed', sans-serif;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .login-register-container {
+      padding: 5rem $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .login-register-container {
+    .login-register-form {
+      width: 100%;
+      padding: 0;
+
+      .heading {
+        font-size: 1.25rem;
+      }
+
+      .sign-in-info {
+        font-size: 0.7rem;
+      }
+
+      input {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+}

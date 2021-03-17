@@ -1,0 +1,150 @@
+@import 'utils';
+
+.user-edit,
+.podcast-edit {
+  min-height: 100vh;
+  padding: 10rem 12rem;
+  background: rgb(18, 19, 20);
+  color: white;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 36rem;
+    padding: 3rem 8rem;
+    margin: auto;
+    background-color: rgb(27, 29, 31);
+
+    .heading {
+      font-size: 1rem;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    label {
+      font-size: 0.7rem;
+      margin: 0.25rem 0;
+    }
+
+    input,
+    textarea {
+      margin-bottom: 0.6rem;
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      background-color: #141414;
+      color: white;
+      border: none;
+      border: solid 2px transparent;
+
+      &:hover {
+        border: solid 2px rgb(94, 94, 94);
+      }
+    }
+
+    .file-form,
+    .data-form {
+      position: relative;
+      margin-top: 2rem 0;
+
+      &:hover {
+        button {
+          background: black;
+        }
+      }
+
+      button {
+        width: 100%;
+        display: block;
+        font-size: 0.6rem;
+        font-family: inherit;
+        padding: 0.6rem 1.15rem;
+        background-color: #141414;
+        color: white;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        font-size: 0.6rem;
+        padding: 0.6rem 1.15rem;
+        background-color: black;
+        color: white;
+        cursor: pointer;
+        border: none;
+      }
+    }
+
+    textarea {
+      height: 6rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    .update-button {
+      margin-top: 2rem;
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      width: 100%;
+      border: solid 2px black;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: black;
+      color: white;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .player {
+      padding: 0 $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .user-edit,
+  .podcast-edit {
+    padding: 3rem;
+
+    form {
+      width: 100%;
+      padding: 4rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .user-edit,
+  .podcast-edit {
+    padding: 0rem;
+    padding-top: 5rem;
+    background-color: rgb(27, 29, 31);
+
+    form {
+      width: 100%;
+      padding: 2rem 1rem;
+
+      textarea {
+        height: 10rem;
+      }
+    }
+  }
+}

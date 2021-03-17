@@ -1,0 +1,113 @@
+@import 'utils';
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: black;
+  color: white;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: black;
+    opacity: 0.5;
+  }
+
+  .section-preview {
+    width: 100%;
+    padding: 10rem $page_padding_x;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+
+    &:nth-of-type(even) {
+      justify-content: flex-end;
+      text-align: right;
+
+      .text-content {
+        align-items: flex-end;
+      }
+    }
+
+    .background-image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    * {
+      z-index: 1;
+    }
+
+    .text-content {
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+
+      &.hidden {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      h3 {
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .podcast-title {
+        font-size: 2.25rem;
+        text-transform: uppercase;
+        margin: 0.5rem 0;
+      }
+
+      .basic-button {
+        font-size: 0.6rem;
+        padding: 0.6rem 1.15rem;
+        display: block;
+        width: fit-content;
+        border: solid 2px white;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: white;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .landing {
+      .section-preview {
+        padding: 4rem $padding;
+
+        .text-content {
+          .podcast-title {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,324 @@
+@import 'utils';
+$liked_width: 12rem;
+
+.user-panel {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+  padding: 0 $page_padding_x;
+  color: white;
+  background-color: rgb(18, 19, 20);
+
+  .heading {
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 0;
+  }
+
+  .user-data {
+    width: calc(100% - #{$liked_width});
+    padding: 3rem 1rem;
+    padding-bottom: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    background-color: rgb(27, 29, 31);
+
+    .photo-settings {
+      width: 20rem;
+      display: flex;
+      align-items: flex-end;
+
+      .picture-box {
+        position: relative;
+        margin-right: 2rem;
+        width: 6rem;
+        height: 6rem;
+
+        .profile-pic {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          background-color: rgb(30, 73, 75);
+        }
+
+        .loader-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          top: 0;
+          background-color: black;
+          opacity: 0.6;
+        }
+      }
+
+      .basic-data {
+        .username {
+          margin: {
+            top: 0;
+            bottom: 1rem;
+          }
+          font-size: 1.25rem;
+        }
+
+        .picture-form {
+          position: relative;
+          width: 6rem;
+
+          &:hover {
+            button {
+              background: rgb(129, 182, 189);
+            }
+          }
+
+          button {
+            width: 100%;
+            font-size: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            display: block;
+            border: none;
+            background-color: #141414;
+            text-transform: uppercase;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.15s ease;
+          }
+
+          input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            font-size: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+            border: none;
+          }
+        }
+      }
+    }
+
+    .data-form {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 20rem;
+      margin-top: 3rem;
+      color: white;
+
+      label {
+        font-size: 0.7rem;
+        margin: 0.25rem 0;
+      }
+
+      input {
+        margin-bottom: 0.6rem;
+        font-size: 0.6rem;
+        padding: 0.6rem 1.15rem;
+        background-color: #141414;
+        color: white;
+        border: none;
+        border: solid 2px transparent;
+
+        &[type='file'] {
+          position: absolute;
+          width: 100%;
+          top: 0;
+          border: none;
+          opacity: 0;
+        }
+
+        &:hover {
+          border: solid 2px rgb(94, 94, 94);
+        }
+      }
+
+      .heading {
+        margin: 1rem 0;
+      }
+
+      input[type='file'] {
+        cursor: pointer;
+        &:hover {
+          border: none;
+        }
+      }
+
+      button {
+        font-size: 0.6rem;
+        padding: 0.6rem 1.15rem;
+        width: 100%;
+        border: solid 2px black;
+        text-transform: uppercase;
+        font-weight: bold;
+        background: black;
+        color: white;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      background-color: rgb(20, 20, 20);
+    }
+  }
+
+  .liked-podcasts {
+    display: flex;
+    flex-direction: column;
+    width: $liked_width;
+    padding: 3rem 0;
+    padding-right: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    transition: all 0.3s ease;
+
+    .liked-podcast-link {
+      color: white;
+      text-decoration: none;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      padding: 0.55rem;
+      width: 100%;
+      border-bottom: solid 1px rgb(48, 48, 48);
+      transition: all 0.1s ease;
+
+      &:last-of-type {
+        border: none;
+      }
+
+      h3 {
+        width: 100%;
+        font-size: 0.55rem;
+        margin: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      span {
+        font-size: 0.55rem;
+        width: 0.75rem;
+      }
+
+      img {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0 0.5rem;
+      }
+
+      &:hover {
+        background-color: black;
+      }
+    }
+  }
+
+  &.hidden {
+    .user-data {
+      opacity: 0;
+    }
+
+    .liked-podcasts {
+      opacity: 0;
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .user-panel {
+      padding: 0 $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .user-panel {
+    .user-data {
+      width: calc(100% - 9rem);
+
+      .photo-settings {
+        width: 90%;
+
+        .picture-box {
+          width: 6rem;
+          height: 6rem;
+          margin-right: 1rem;
+        }
+      }
+
+      .data-form {
+        width: 90%;
+      }
+    }
+    .liked-podcasts {
+      width: 9rem;
+      padding: 2rem 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .user-panel {
+    flex-direction: column-reverse;
+    padding: 0;
+
+    .user-data {
+      width: 100%;
+      padding-bottom: 3rem;
+
+      .photo-settings {
+        width: 100%;
+
+        .picture-box {
+          width: 5rem;
+          height: 5rem;
+        }
+
+        .basic-data {
+          .username {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .picture-form {
+            width: 5rem;
+
+            button {
+              font-size: 0.4rem;
+            }
+          }
+        }
+      }
+
+      .data-form {
+        width: 100%;
+      }
+    }
+
+    .liked-podcasts {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}

@@ -1,0 +1,120 @@
+@import 'utils';
+
+.admin-panel {
+  min-height: 100vh;
+  padding: 10rem 12rem;
+  text-align: left;
+  background: rgb(18, 19, 20);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.15s ease;
+
+  &.admin-panel-hidden {
+    opacity: 0;
+  }
+
+  th {
+    background-color: rgb(43, 43, 43);
+    color: white;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    border: solid 1px rgb(76, 80, 85);
+  }
+
+  h3 {
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    .edit:hover {
+      color: rgb(93, 169, 204);
+    }
+
+    .delete:hover {
+      color: red;
+    }
+  }
+
+  i {
+    color: white;
+  }
+
+  .list-container {
+    margin-top: 3rem;
+    width: 100%;
+    table {
+      width: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .adding-button {
+    font-size: 0.6rem;
+    padding: 0.6rem 1.15rem;
+    display: block;
+    width: fit-content;
+    border: solid 2px white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    transition: all 0.3s ease;
+    font-family: inherit;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .admin-panel {
+      padding: 7rem $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-panel {
+    width: 100%;
+    padding: 7rem 0;
+    font-size: 0.4rem;
+
+    th,
+    td {
+      padding: 0.15rem;
+    }
+
+    i {
+      font-size: 0.5rem;
+    }
+  }
+}

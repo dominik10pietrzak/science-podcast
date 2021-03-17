@@ -1,0 +1,57 @@
+@import 'utils';
+
+.confirm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 1rem;
+  background: transparentize($color: #000000, $amount: 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  display: none;
+
+  .container {
+    background-color: rgb(27, 29, 31);
+    color: rgb(211, 211, 211);
+    font-size: 0.6rem;
+    max-width: 100%;
+
+    p {
+      padding: 1.25rem 2rem;
+      margin: 0;
+      width: 100%;
+    }
+
+    .buttons {
+      padding: 1rem 2rem;
+    }
+
+    .buttons {
+      border-top: solid 1px rgb(57, 61, 63);
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        outline: none;
+        border: none;
+        color: rgb(201, 201, 201);
+        cursor: pointer;
+        text-transform: uppercase;
+        background: transparent;
+
+        &.delete {
+          color: $main_cyan;
+          margin-left: 0.5rem;
+          font-weight: bold;
+        }
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}

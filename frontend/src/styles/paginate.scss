@@ -1,0 +1,14 @@
+.paginate {
+  margin-top: 2rem;
+
+  .page-link {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 0.5rem;
+
+    &.active {
+      color: gray;
+      pointer-events: none;
+    }
+  }
+}

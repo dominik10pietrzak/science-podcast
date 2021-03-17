@@ -1,0 +1,145 @@
+@import 'utils';
+
+.weather {
+  height: 100vh;
+  padding: 0 $page_padding_x_thin;
+  background-color: black;
+  color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.2s ease;
+    opacity: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: black;
+    opacity: 0.5;
+  }
+
+  .weather-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 4rem 5rem;
+    position: inherit;
+    background: transparentize($color: #000000, $amount: 0.6);
+    z-index: 5;
+    transition: all 0.3s ease;
+
+    &.content-hidden {
+      opacity: 0;
+    }
+
+    .search-form {
+      display: flex;
+      input,
+      button {
+        outline: none;
+      }
+
+      input {
+        height: 1.5rem;
+        width: 7rem;
+        font-size: 0.6rem;
+        border: none;
+        border-bottom: solid 2px white;
+        border-right: none;
+        background: transparent;
+        color: white;
+
+        &::-moz-placeholder {
+          color: white;
+        }
+        &::placeholder {
+          color: white;
+        }
+      }
+
+      button {
+        font-size: 0.6rem;
+        border: none;
+        border-bottom: solid 2px white;
+        background: transparent;
+        color: white;
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .weather {
+      padding: 0 $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .weather {
+    .weather-content {
+      padding: 2rem 5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .weather {
+    height: auto;
+    background: linear-gradient(to bottom, purple, orange);
+    background: rgb(18, 19, 20);
+
+    &::after {
+      opacity: 0.7;
+    }
+
+    .background {
+      // display: none;
+    }
+    padding: 0;
+    min-height: 100vh;
+
+    .weather-content {
+      background: transparent;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      padding-top: 4rem;
+
+      .search-form {
+        width: 100%;
+        input {
+          width: 100%;
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}

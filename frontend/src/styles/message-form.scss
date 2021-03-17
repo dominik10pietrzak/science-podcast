@@ -1,0 +1,149 @@
+.message-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(27, 29, 31);
+  background-color: rgb(18, 19, 20);
+  width: 100%;
+  padding: 2rem 1.5rem;
+  // margin-top: 5rem;
+
+  * {
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .heading {
+    font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    margin-top: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    color: white;
+
+    .form-flex-container {
+      display: flex;
+      width: 100%;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 0 1.5rem;
+        width: 50%;
+
+        label {
+          font-size: 0.7rem;
+          margin: 0.25rem 0;
+        }
+
+        input,
+        textarea {
+          margin-bottom: 1.2rem;
+          font-size: 0.6rem;
+          padding: 0.6rem 1.15rem;
+          background-color: rgb(18, 19, 20);
+          background-color: rgb(27, 29, 31);
+          color: white;
+          border: none;
+          border-radius: 0;
+          outline: none;
+          border: solid 2px transparent;
+
+          &:hover {
+            border: solid 2px rgb(94, 94, 94);
+          }
+        }
+
+        textarea {
+          height: 100%;
+          resize: none;
+        }
+      }
+    }
+
+    button {
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      border: solid 2px black;
+      text-transform: uppercase;
+      font-weight: bold;
+      background: black;
+      margin: 0 1.5rem;
+      color: white;
+      font-family: 'Barlow Condensed', sans-serif;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+
+@media only screen and(max-width: 420px) {
+  .message-form {
+    padding: 0 0.5rem;
+    padding-bottom: 1rem;
+    background: transparent;
+
+    .form-container {
+      padding: 2rem 0;
+      padding-top: 0;
+
+      .form-flex-container {
+        flex-direction: column;
+
+        .form-group {
+          width: 100%;
+          margin: 0;
+          padding: 0 1rem;
+
+          input {
+            border: none;
+            border-bottom: solid 1px gray;
+
+            &:focus {
+              border: none;
+              border-bottom: solid 1px rgb(177, 177, 177);
+            }
+
+            &:hover {
+              border: none;
+              border-bottom: solid 1px rgb(177, 177, 177);
+            }
+          }
+
+          textarea {
+            border: solid 1px gray;
+
+            &:focus {
+              border: solid 1px rgb(177, 177, 177);
+            }
+          }
+
+          input,
+          textarea {
+            padding: 0.25rem;
+          }
+
+          textarea {
+            height: 6rem;
+          }
+        }
+      }
+
+      button {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

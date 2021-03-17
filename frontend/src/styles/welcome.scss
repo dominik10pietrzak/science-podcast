@@ -1,0 +1,69 @@
+.welcome {
+  padding: 10rem 15rem;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  background-color: black;
+  color: white;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: black;
+    opacity: 0.6;
+  }
+
+  .background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    object-fit: cover;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  * {
+    z-index: 1;
+  }
+
+  .text-content {
+    h3 {
+      text-transform: uppercase;
+      font-weight: normal;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .podcast-title {
+      font-size: 2.25rem;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .basic-button {
+      margin-top: 1.5rem;
+      font-size: 0.6rem;
+      padding: 0.6rem 1.15rem;
+      display: block;
+      width: fit-content;
+      border: solid 2px white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: white;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}

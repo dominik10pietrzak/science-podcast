@@ -1,0 +1,271 @@
+@import 'utils';
+
+.comments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 20rem;
+  margin: 0;
+  background: rgb(18, 19, 20);
+  color: white;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0.5s;
+
+  .loader {
+    display: none;
+
+    &.loader-visible {
+      display: inherit;
+    }
+  }
+
+  *:not(i) {
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .section-title {
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+
+    .form-group {
+      position: relative;
+      width: 100%;
+
+      input {
+        width: 100%;
+        padding: 0.5rem 0;
+        font-size: 0.6rem;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        border-bottom: solid 1px transparentize($color: white, $amount: 0.8);
+        outline: none;
+        transition: all 0.1s ease;
+        color: white;
+
+        &:disabled {
+          background-color: white;
+        }
+
+        &::placeholder {
+          color: rgb(214, 214, 214);
+        }
+
+        &:focus {
+          &::after {
+            width: 100%;
+            left: 0;
+          }
+
+          ~ .line {
+            width: 100%;
+            left: 0;
+          }
+        }
+      }
+
+      .line {
+        position: absolute;
+        width: 0%;
+        left: 50%;
+        height: 1px;
+        bottom: 0;
+        background-color: rgb(255, 255, 255);
+        transition: all 0.3s ease;
+      }
+    }
+
+    .comment-buttons {
+      display: flex;
+      transition: all 0.1s ease;
+
+      &.comment-active {
+        .submit-button {
+          background: white;
+          color: black;
+          opacity: 1 !important;
+          pointer-events: all;
+        }
+      }
+
+      button {
+        margin: {
+          top: 0.5rem;
+          left: 0.5rem;
+        }
+        font-size: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        display: block;
+        background: rgb(116, 116, 116);
+        border: none;
+        text-transform: uppercase;
+        font-family: inherit;
+        font-weight: bold;
+        color: black;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.15s ease;
+
+        &.cancel-button {
+          border: none;
+          background: transparent;
+          color: rgb(156, 156, 156);
+
+          &:hover {
+            color: white;
+          }
+        }
+
+        &.submit-button {
+          pointer-events: none;
+
+          &:hover {
+            background-color: $main_cyan;
+          }
+        }
+      }
+    }
+  }
+
+  .comments-list {
+    margin-top: 1rem;
+
+    .heading {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 1750px) {
+  .comments {
+    padding: 2rem 14rem;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .comments {
+    padding: 2rem 12rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .comments {
+    padding: 2rem 6rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .comments {
+    padding: 2rem 3rem;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .comments {
+    padding: 2rem 0.5rem;
+
+    .comment-form {
+      .comment-buttons {
+        button {
+          padding: 0.2rem 0.4rem;
+        }
+      }
+    }
+
+    .comments-list {
+      .comment {
+        font-size: 0.5rem;
+
+        button {
+          padding: 0.2rem 0.4rem;
+        }
+
+        &.reply {
+          padding-left: 0.85rem;
+        }
+
+        .comment-data-container {
+          .author-profile-photo {
+            width: 1.15rem;
+            height: 1.15rem;
+            margin-right: 0.25rem;
+          }
+
+          .wrapper {
+            .comment-info {
+              span,
+              i {
+                font-size: 0.55rem;
+                margin-right: 0.45rem;
+              }
+
+              .basic {
+                *:not(.author) {
+                  font-size: 0.5rem;
+                }
+
+                .author {
+                  font-size: 0.6rem;
+                }
+
+                .date-added {
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  i {
+                    display: none;
+                  }
+                }
+
+                .edited {
+                  display: none;
+                }
+              }
+
+              .comment-user-functions {
+                font-size: 0.55rem;
+              }
+            }
+
+            .content {
+              font-size: 0.55rem;
+              color: white;
+            }
+
+            .respond-button {
+              font-size: 0.5rem;
+            }
+
+            .form-group input {
+              font-size: 0.5rem;
+            }
+
+            .comment-buttons {
+              button {
+                padding: 0.2rem 0.4rem;
+              }
+            }
+
+            .activities {
+              .like-button {
+                margin-right: 0.35rem;
+              }
+
+              .like-balance {
+                font-size: 0.7rem;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
