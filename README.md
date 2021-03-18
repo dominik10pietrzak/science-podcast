@@ -1,3 +1,1 @@
-# science-podcast
-
-Podcast Naukowy
+# Podcast Naukowy
