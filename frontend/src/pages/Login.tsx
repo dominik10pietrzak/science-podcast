@@ -27,9 +27,9 @@ const Login: React.FC<{ location: any; history: any }> = ({
       history.push(redirect);
     }
 
-    (document.querySelector(
-      '.login-register-container'
-    ) as HTMLElement).style.height = `${window.innerHeight}px`;
+    // (document.querySelector(
+    //   '.login-register-container'
+    // ) as HTMLElement).style.height = `${window.innerHeight}px`;
     onLoadAnimations();
 
     return () => {

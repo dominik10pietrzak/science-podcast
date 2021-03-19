@@ -35,11 +35,10 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   };
 
   const checkIfMobile = () => {
-    if (window.innerWidth < 420) {
+    const player = document.querySelector('.player') as HTMLElement;
+    if (player && window.innerWidth < 420) {
       setMobileLayout(true);
-      (document.querySelector(
-        '.player'
-      ) as HTMLElement).style.background = `rgb${podcast.dominant_color}`;
+      player.style.background = `rgb${podcast.dominant_color}`;
     } else {
       setMobileLayout(false);
     }

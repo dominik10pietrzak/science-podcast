@@ -16,6 +16,7 @@ from rest_framework import status
 
 from django.core.mail import send_mail
 from django.conf import settings
+from decouple import config
 import json
 
 
@@ -147,8 +148,8 @@ def send_email_message(request):
     send_mail(
         message_title,
         data['message'],
-        data['email'],
-        [data['email']],
+        settings.EMAIL_HOST_USER,
+        [config('EMAIL_TARGET')],
         fail_silently=False,
     )
 
