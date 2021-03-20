@@ -161,22 +161,28 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     const onwerButtons = document.querySelector(
       `#comment-${commentId} .comment-user-functions .owner-buttons`
     ) as HTMLElement;
+    const commentValue = document.getElementById(
+      `comment-input-${commentId}`
+    ) as HTMLInputElement;
+
     editButtons.classList.toggle('buttons-disabled');
     onwerButtons.classList.toggle('buttons-disabled');
+    commentValue.classList.toggle('editable');
   };
 
   const startStopEditingComment = (commentId: number) => {
     buttonsToggle(commentId);
-    const comment = document.getElementById(
+
+    const commentValue = document.getElementById(
       `comment-input-${commentId}`
     ) as HTMLInputElement;
-    if (comment.contentEditable === 'true') {
-      comment.contentEditable = 'false';
+
+    if (commentValue.contentEditable === 'true') {
+      commentValue.contentEditable = 'false';
     } else {
       dispatch(getComments(podcastId, false));
-      comment.contentEditable = 'true';
+      commentValue.contentEditable = 'true';
     }
-    comment.focus();
   };
 
   const editCommentText = (

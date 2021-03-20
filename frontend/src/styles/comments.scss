@@ -50,10 +50,6 @@
         transition: all 0.1s ease;
         color: white;
 
-        &:disabled {
-          background-color: white;
-        }
-
         &::placeholder {
           color: rgb(214, 214, 214);
         }

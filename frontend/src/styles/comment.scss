@@ -132,18 +132,23 @@
         width: 100%;
         margin: 0.5rem 0;
         font-size: 0.6rem;
-        padding: 0;
         font-weight: 500;
         background: transparent;
         outline: none;
         color: white;
         word-wrap: break-word;
         font-weight: lighter;
+        transition: all 0.3s ease;
+        border-bottom: solid 1px transparent;
 
         .higher-author {
           color: $main_cyan;
           font-weight: 800;
           margin-right: 0.25rem;
+        }
+
+        &.editable {
+          background: rgb(27, 29, 31);
         }
       }
 

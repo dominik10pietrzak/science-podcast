@@ -48,16 +48,16 @@ const Landing: React.FC = () => {
     if (!temp || !desc) {
       getWeather();
     }
+  }, [dispatch, podcast]);
 
+  useEffect(() => {
     if (window.innerWidth < 1024) {
       const sections = document.querySelectorAll('.landing .podcast-preview');
       sections.forEach((section) => {
         (section as HTMLElement).style.height = `${window.innerHeight}px`;
       });
     }
-  }, [dispatch, podcast]);
 
-  useEffect(() => {
     return () => {
       dispatch({ type: 'PODCAST_DETAILS_RESET' });
     };

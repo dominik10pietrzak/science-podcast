@@ -141,15 +141,15 @@ def deleteUser(request, pk):
 @api_view(['POST'])
 def send_email_message(request):
     data = request.data
-    print('data: ', data)
+    message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] 
 
-    message_title = 'Wiadomość ze strony portfolio od - ' + data['message_name'] 
+    message =  data['message'] + ' ' + data['email']
 
     send_mail(
         message_title,
-        data['message'],
+        message,
         settings.EMAIL_HOST_USER,
-        [config('EMAIL_TARGET')],
+        ['dominikpietrzak.webdev@gmail.com'],
         fail_silently=False,
     )
 

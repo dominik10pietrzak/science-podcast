@@ -4,10 +4,8 @@ import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { getPodcasts } from '../actions/podcastActions';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
 import Loader from '../components/Loader';
 import axios from 'axios';
-import Footer from '../components/footer';
 
 const UserPanel: React.FC<{ history: any }> = ({ history }) => {
   const [username, setUsername] = useState('');
@@ -17,6 +15,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
   const [profilePic, setProfilePic] = useState('');
+  const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
 
   useEffect(() => {
     (document.querySelector('.navbar') as HTMLElement).classList.add('static');
-    // (document.querySelector('.footer') as HTMLElement).classList.add('hidden');
 
     if (!userInfo || !userInfo.id) {
       history.push('/login');
@@ -50,6 +48,8 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
         setName(user.name);
         setEmail(user.email);
         setProfilePic(user.userProfile.profile_pic);
+        setLoading(false);
+        fadeInAnimations();
       }
     }
     dispatch(getPodcasts());
@@ -83,7 +83,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
 
     setTimeout(() => {
       panel.classList.remove('hidden');
-    }, 150);
+    }, 15);
   };
 
   const uploadFileHandler = () => async (e: React.FormEvent | any) => {
@@ -118,11 +118,15 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
 
   return (
     <div className='user-panel hidden'>
-      {userInfo && podcasts ? (
+      {loading ? (
+        <Loader />
+      ) : (
         <>
-          <div className='liked-podcasts' onLoad={fadeInAnimations}>
+          <div className='liked-podcasts'>
             <h3 className='heading'>Polubienia:</h3>
-            {userInfo &&
+            {loadingPodcasts ? (
+              <Loader />
+            ) : (
               podcasts
                 .filter((podcast: any) =>
                   podcast.likes.find((like: any) => like.user === userInfo.id)
@@ -146,10 +150,11 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
                     key={podcast.title}
                     to={`podcast/${podcast.id}`}>
                     <span>{idx + 1}</span>
-                    <img src={podcast.cover} alt='' />
+                    <img src={podcast.cover} alt='cover' />
                     <h3>{podcast.title}</h3>
                   </Link>
-                ))}
+                ))
+            )}
           </div>
           <div className='user-data'>
             <div className='photo-settings'>
@@ -214,12 +219,9 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
               />
               <button type='submit'>Aktualizuj</button>
             </form>
-            {/* <Footer /> */}
           </div>
         </>
-      ) : loadingPodcasts || loadingUser ? (
-        <Loader />
-      ) : null}
+      )}
     </div>
   );
 };

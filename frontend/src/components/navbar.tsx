@@ -30,7 +30,9 @@ const Navbar: React.FC = () => {
     });
 
     sideButtons.forEach((button, idx) => {
-      (button as HTMLElement).style.transition = `all 0.3s ease ${idx * 0.05}s`;
+      (button as HTMLElement).style.transition = `all 0.3s ease ${
+        idx * 0.05 + 0.1
+      }s`;
     });
   }, [userInfo, history]);
 
@@ -52,12 +54,10 @@ const Navbar: React.FC = () => {
     e.stopPropagation();
     const hamburger = document.querySelector('.menu-button') as HTMLElement;
     const menu = document.querySelector('.navbar') as HTMLElement;
-    const app = document.querySelector('body') as HTMLElement;
 
     const toggleMenu = () => {
       hamburger.classList.toggle('button-active');
       menu.classList.toggle('navbar-active');
-      // app.classList.toggle('app-swipe');
     };
 
     toggleMenu();

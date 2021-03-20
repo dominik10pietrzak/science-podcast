@@ -155,7 +155,7 @@
       z-index: 50;
 
       .navigation-button {
-        margin: 0.35rem 0;
+        margin: 0.3rem 0;
       }
     }
   }
@@ -172,6 +172,7 @@
 
       .side-button {
         opacity: 0;
+        transform: translateX(12px);
       }
     }
   }
