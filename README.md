@@ -2,7 +2,7 @@
 Aplikacja znajduje się pod adresem: https://science-podcast.herokuapp.com </br> Polecam założyć konto(nawet na całkowicie fałszywe dane), aby poznać wszystkie funkcjonalności aplikacji.
 
 ## O działaniu aplikacji
-Strona jest aplikacją SPA, w której wymiana danych pomiędzy klientem a serwerem działa na zasadzie REST API. Za frontend odpowiada React (Typescript, SCSS), któremu w zarządaniu danymi pomaga Redux. Po stronie backendu mamy Pythona i jego framweork Django. Django REST Framework umożliwia wymianę danych pomiędzy serwerem a klientem.
+Strona jest aplikacją SPA, w której wymiana danych pomiędzy klientem a serwerem działa na zasadzie REST API. Za frontend odpowiada React (Typescript, SCSS), któremu w zarządzaniu danymi pomaga Redux. Po stronie backendu mamy Pythona i jego framweork Django. Django REST Framework umożliwia wymianę danych pomiędzy serwerem a klientem.
 
 ## Funkcjonalności
 - Słuchanie podcastów przechowywanych w AWS
