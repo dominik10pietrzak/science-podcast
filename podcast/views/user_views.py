@@ -141,9 +141,11 @@ def deleteUser(request, pk):
 @api_view(['POST'])
 def send_email_message(request):
     data = request.data
-    message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] 
 
+    message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] 
     message =  data['message'] + ' ' + data['email']
+
+    print(data)
 
     send_mail(
         message_title,
