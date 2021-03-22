@@ -145,8 +145,6 @@ def send_email_message(request):
     message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] 
     message =  data['message'] + ' ' + data['email']
 
-    print(data)
-
     send_mail(
         message_title,
         message,

@@ -68,11 +68,13 @@ $settings_width: 11.5rem;
 
       .main-cover {
         background-color: white;
-        width: 12rem;
-        height: 12rem;
+        width: 12rem !important;
+        height: 12rem !important;
         margin-right: 2rem;
         opacity: 0;
         transition: all 0.3s ease 0.3s;
+        object-position: center;
+        object-fit: cover;
       }
 
       .newest-podcast-data {
@@ -171,6 +173,7 @@ $settings_width: 11.5rem;
               height: 100%;
               left: 0;
               top: 0;
+              object-fit: cover;
               z-index: 0;
               opacity: 0;
               transition: all 0.3s ease;
