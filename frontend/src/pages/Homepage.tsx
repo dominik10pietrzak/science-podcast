@@ -18,10 +18,8 @@ const Landing: React.FC = () => {
   const [temp, setTemp] = useState(0);
   const [desc, setDesc] = useState('');
   const [weatherLoading, setWeatherLoading] = useState(false);
-
-  const { podcast, loading } = useSelector(
-    (state: RootStateOrAny) => state.podcastDetails
-  );
+  const [podcast, setPodcast] = useState({} as any);
+  const [loading, setLoading] = useState(true);
 
   const getWeather = async () => {
     const APIKey = 'e7eec20a0655f51584d3e1a50afa74ca';
@@ -40,15 +38,27 @@ const Landing: React.FC = () => {
     }
   };
 
+  const getNewestPodcast = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get('/api/podcast/newest');
+      setPodcast(data);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    dispatch(getPodcastDetails(0));
-    if (podcast.title) {
+    if (!podcast.title) {
+      getNewestPodcast();
+    } else {
       loadTextContent();
     }
     if (!temp || !desc) {
       getWeather();
     }
-  }, [dispatch, podcast]);
+  }, [podcast]);
 
   useEffect(() => {
     if (window.innerWidth < 1024) {
@@ -57,10 +67,6 @@ const Landing: React.FC = () => {
         (section as HTMLElement).style.height = `${window.innerHeight}px`;
       });
     }
-
-    return () => {
-      dispatch({ type: 'PODCAST_DETAILS_RESET' });
-    };
   }, []);
 
   const loadImage = (e: any) => {

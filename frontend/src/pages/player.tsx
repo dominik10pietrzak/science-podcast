@@ -104,6 +104,9 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
           'Content-type': 'application/json',
           Authorization: `Bearer ${userInfo.token}`,
         },
+        data: {
+          type: 'podcast',
+        },
       };
 
       likeButton.classList.toggle('liked');
@@ -115,7 +118,11 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
         likes.splice(likes.indexOf(userInfo.id), 1);
       } else {
         setLikesCount(likesCount + 1);
-        await axios.post(`/api/podcast/${podcastId}/like/`, {}, config);
+        await axios.post(
+          `/api/podcast/${podcastId}/like/`,
+          { type: 'podcast' },
+          config
+        );
         likes.push(userInfo.id);
       }
     } catch (error) {
@@ -179,13 +186,12 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                           isLiked ? 'liked' : ''
                         }`}
                         onClick={likeUnlike}></i>
-                      {likesCount}
+                      <span className='like-balance'>{likesCount}</span>
                     </span>
                     <span className='activity'>
                       <i
                         className='fas fa-comment comment-button'
                         onClick={goToComments}></i>
-                      {/* {podcast.comments && countComments()} */}
                       {commentsNumber}
                     </span>
                   </div>

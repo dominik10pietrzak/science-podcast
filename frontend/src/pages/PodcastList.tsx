@@ -13,7 +13,7 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
   };
 
   const dispatch = useDispatch();
-  const { podcasts, loading, pages, page } = useSelector(
+  const { podcasts, loading } = useSelector(
     (state: RootStateOrAny) => state.podcastList
   );
 
@@ -54,7 +54,7 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
     if (activeButton.innerText === 'Wszystkie') {
       history.push(`/podcast/`);
     } else {
-      history.push(`/podcast/?keyword=${activeButton.innerText}&page=1`);
+      history.push(`/podcast/?search=${activeButton.innerText}&page=1`);
     }
   };
 
@@ -146,7 +146,7 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
                       )
                   )}
               </div>
-              <Paginate page={page} pages={pages} keyword={keyword} />
+              {/* <Paginate page={page} pages={pages} keyword={keyword} /> */}
             </div>
             {/* <div className='best-list'>
               <h3 className='heading'>Najlepiej oceniane</h3>

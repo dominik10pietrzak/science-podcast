@@ -10,6 +10,7 @@ import Confirm from './Confirm';
 import { useHistory } from 'react-router-dom';
 
 import Comment from './Comment';
+import { activatePastePermission } from '../functions/commentFunctions';
 
 const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   const [commentText, setCommentText] = useState('');
@@ -52,14 +53,8 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     author: string = ''
   ) => {
     e.preventDefault();
-    console.log(commentId);
 
     if (!userInfo) {
-      const comment = document.querySelector(
-        `#comment-${commentId}`
-      ) as HTMLElement;
-      console.log(comment);
-
       return;
     }
 
@@ -128,12 +123,12 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
           'Content-type': 'application/json',
           Authorization: `Bearer ${userInfo.token}`,
         },
+        data: {
+          type: 'comment',
+        },
       };
       const likes = document.getElementById(`likes-${commentId}`) as any;
       const isLiked = likeButton.classList.contains('liked');
-
-      likeButton.classList.toggle('liked');
-      console.log(isLiked);
 
       if (isLiked) {
         await axios.delete(
@@ -144,11 +139,13 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
       } else {
         await axios.post(
           `/api/podcast/comments/${commentId}/like/`,
-          {},
+          { type: 'comment' },
           config
         );
         likes.innerText = Number(likes.innerText) + 1;
       }
+
+      likeButton.classList.toggle('liked');
     } catch (error) {
       console.log(error);
     }
@@ -170,7 +167,7 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     commentValue.classList.toggle('editable');
   };
 
-  const startStopEditingComment = (commentId: number) => {
+  const startStopEditingComment = async (commentId: number) => {
     buttonsToggle(commentId);
 
     const commentValue = document.getElementById(
@@ -179,8 +176,8 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
 
     if (commentValue.contentEditable === 'true') {
       commentValue.contentEditable = 'false';
+      await dispatch(getComments(podcastId, false));
     } else {
-      dispatch(getComments(podcastId, false));
       commentValue.contentEditable = 'true';
     }
   };
@@ -233,18 +230,6 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const activatePastePermission = () => {
-    const comments = document.querySelectorAll('.comment-content-text');
-    comments.forEach((comment) => {
-      (comment as HTMLElement).addEventListener('paste', function (e: any) {
-        e.preventDefault();
-        var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-
-        document.execCommand('insertHTML', false, text);
-      });
-    });
   };
 
   return comments ? (

@@ -7,7 +7,6 @@ from rest_framework.response import Response
 
 from django.contrib.auth.models import User
 from podcast.serializers import UserSerializer, UserSerializerWithToken
-# from .products import products
 from podcast.models import UserProfile
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer

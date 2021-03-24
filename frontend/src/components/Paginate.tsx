@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import '../styles/paginate.scss';
 
@@ -16,12 +17,12 @@ const Paginate: React.FC<Props> = ({ page, pages, keyword }) => {
   return pages > 1 ? (
     <div className='paginate'>
       {[...Array(pages).keys()].map((x) => (
-        <a
+        <Link
           className={`page-link ${x + 1 === page ? 'active' : ''}`}
           key={x + 1}
-          href={`/podcast/?keyword=${keyword}&page=${x + 1}`}>
+          to={`/podcast/?keyword=${keyword}&page=${x + 1}`}>
           <span>{x + 1}</span>
-        </a>
+        </Link>
       ))}
     </div>
   ) : (

@@ -6,9 +6,9 @@ export const podcastListReducer = (state = { podcasts: [] }, action: any) => {
     case 'PODCAST_LIST_SUCCESS':
       return {
         loading: false,
-        podcasts: action.payload.podcasts,
-        page: action.payload.page,
-        pages: action.payload.pages,
+        podcasts: action.payload.results,
+        // page: action.payload.page,
+        // pages: action.payload.pages,
       };
 
     case 'PODCAST_LIST_FAIL':

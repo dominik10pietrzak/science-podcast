@@ -88,28 +88,28 @@
 
         .activity {
           margin-right: 1rem;
-        }
 
-        .like-button,
-        .comment-button {
-          cursor: pointer;
-          transition: all 0.3s ease;
-          margin-right: 0.5rem;
-        }
-
-        .like-button {
-          &:hover {
-            color: $main_pink;
+          .like-button,
+          .comment-button {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
           }
 
-          &.liked {
-            color: $main_pink;
-          }
-        }
+          .like-button {
+            &:hover {
+              color: $main_pink;
+            }
 
-        .comment-button {
-          &:hover {
-            color: $main_cyan;
+            &.liked {
+              color: $main_pink;
+            }
+          }
+
+          .comment-button {
+            &:hover {
+              color: $main_cyan;
+            }
           }
         }
       }

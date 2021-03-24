@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getPodcasts = (keyword = '') => async (dispatch: Function) => {
   try {
     dispatch({ type: 'PODCAST_LIST_REQUEST' });
-    console.log(keyword);
+
     const { data } = await axios.get(`/api/podcast/${keyword}`);
 
     dispatch({ type: 'PODCAST_LIST_SUCCESS', payload: data });
@@ -23,6 +23,7 @@ export const getPodcastDetails = (id: number) => async (dispatch: Function) => {
     dispatch({ type: 'PODCAST_DETAILS_REQUEST' });
 
     const { data } = await axios.get(`/api/podcast/${id}`);
+    console.log(data);
 
     dispatch({ type: 'PODCAST_DETAILS_SUCCESS', payload: data });
   } catch (error) {
@@ -44,7 +45,6 @@ export const createPodcastComment = (
     dispatch({
       type: 'PODCAST_CREATE_COMMENT_REQUEST',
     });
-    console.log(comment);
 
     const {
       userLogin: { podcastUserInfo },

@@ -15,7 +15,7 @@ const SearchBar: React.FC = () => {
   let defKeyword = history.location.search;
 
   if (defKeyword) {
-    defKeyword = defKeyword.split('?keyword=')[1].split('&')[0];
+    defKeyword = defKeyword.split('?search=')[1].split('&')[0];
   } else {
     defKeyword = '';
   }
@@ -27,7 +27,7 @@ const SearchBar: React.FC = () => {
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (keyword) {
-      history.push(`/podcast/?keyword=${keyword}&page=1`);
+      history.push(`/podcast/?search=${keyword}&page=1`);
       dispatch(getPodcasts);
     } else {
       history.push(history.location.pathname);
@@ -39,8 +39,8 @@ const SearchBar: React.FC = () => {
       try {
         setLoading(true);
 
-        const data = await axios.get(`/api/podcast/?keyword=${word}&page=1`);
-        setPodcasts(data.data.podcasts);
+        const { data } = await axios.get(`/api/podcast/?search=${word}&page=1`);
+        setPodcasts(data.results);
         await setTimeout(() => {
           setLoading(false);
         }, 750);
@@ -70,6 +70,7 @@ const SearchBar: React.FC = () => {
           {loading ? (
             <Loader />
           ) : (
+            podcasts &&
             podcasts.slice(0, 5).map((podcast: any, idx: number) => (
               <Link
                 className='search-podcast-link'

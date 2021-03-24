@@ -7,7 +7,6 @@ export const getComments = (id: number, reload?: boolean) => async (
     if (reload) {
       dispatch({ type: 'PODCAST_COMMENTS_LIST_REQUEST' });
     }
-
     const { data } = await axios.get(`/api/podcast/${id}/comments`);
 
     dispatch({ type: 'PODCAST_COMMENTS_LIST_SUCCESS', payload: data });
