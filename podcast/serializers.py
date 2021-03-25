@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-
-
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
@@ -65,7 +63,7 @@ class CommentSerializer(serializers.ModelSerializer):
         likes = obj.like_set.all()
         serializer = LikeSerializer(likes, many=True)
         return serializer.data
-
+    
     def get_replies(self, obj):
         replies = obj.comment_set.all()
         serializer = CommentSerializer(replies, many=True)
@@ -87,6 +85,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
 class PodcastSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField(read_only=True)
+    commentsCount = serializers.SerializerMethodField(read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
 
 
@@ -99,6 +98,16 @@ class PodcastSerializer(serializers.ModelSerializer):
         serializer = CommentSerializer(comments, many=True)
         return serializer.data
     
+    def get_commentsCount(self, obj):
+        number = 0
+        comments = obj.comment_set.all()
+        for comment in comments:
+            replies = comment.comment_set.all()
+            number += 1 + len(replies)
+            
+        return number
+
+
     def get_likes(self, obj):
         likes = obj.like_set.all()
         serializer = LikeSerializer(likes, many=True)

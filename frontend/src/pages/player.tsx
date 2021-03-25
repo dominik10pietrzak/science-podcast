@@ -10,7 +10,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   const [likesCount, setLikesCount] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState([] as any);
-  const [commentsNumber, setCommentsNumber] = useState(0);
   const [podcastPreview, setPodcastPreview] = useState({}) as any;
   const [mobileLayout, setMobileLayout] = useState(window.innerWidth < 420);
 
@@ -52,7 +51,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
       dispatch(getPodcastDetails(podcastId));
       getPodcastPreview();
     } else {
-      countComments();
       fadeInPlayer();
       setLikesCount(podcast.likes.length);
       setLikes(podcast.likes);
@@ -135,17 +133,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     window.scrollTo({ top: comments.offsetTop, behavior: 'smooth' });
   };
 
-  const countComments = () => {
-    let number = 0;
-    podcast.comments.forEach((comment: any) => {
-      number += 1;
-      if (comment.replies) {
-        number += comment.replies.length;
-      }
-    });
-    setCommentsNumber(number);
-  };
-
   const handleGoNext = () => {
     history.push(`/podcast/${podcastPreview.id}`);
     history.go(0);
@@ -166,12 +153,14 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                 onLoad={(e) => loadImage(e.target)}
               />
             ) : (
-              <img
-                src={podcast.cover}
-                alt='cover'
-                className='cover'
-                onLoad={(e) => loadImage(e.target)}
-              />
+              <div className='podcast-cover'>
+                <img
+                  src={podcast.cover}
+                  alt='cover'
+                  className='cover'
+                  onLoad={(e) => loadImage(e.target)}
+                />
+              </div>
             )}
             <div className='gradient'></div>
             <div className='wrapper'>
@@ -182,7 +171,7 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                   <div className='activities'>
                     <span className='activity'>
                       <i
-                        className={`fas fa-heart like-button ${
+                        className={`far fa-heart like-button ${
                           isLiked ? 'liked' : ''
                         }`}
                         onClick={likeUnlike}></i>
@@ -190,9 +179,9 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                     </span>
                     <span className='activity'>
                       <i
-                        className='fas fa-comment comment-button'
+                        className='far fa-comment comment-button'
                         onClick={goToComments}></i>
-                      {commentsNumber}
+                      {podcast.commentsCount}
                     </span>
                   </div>
                   <p className='description'>{podcast.description}</p>
@@ -224,10 +213,16 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                   alt='preview-cover'
                   onLoad={(e) => loadImage(e.target)}
                 />
-                <span className='preview-likes'>
-                  <i className='far fa-heart'></i>
-                  {podcastPreview.likes.length}
-                </span>
+                <div>
+                  <span className='preview-likes'>
+                    <i className='far fa-heart'></i>{' '}
+                    {podcastPreview.likes.length}
+                  </span>
+                  <span className='preview-likes'>
+                    <i className='far fa-comment comment-button'></i>{' '}
+                    {podcast.commentsCount}
+                  </span>
+                </div>
               </div>
             </div>
           )}

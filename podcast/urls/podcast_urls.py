@@ -8,7 +8,7 @@ from podcast.views import podcast_views as views
 urlpatterns = [
     url(r'^$', views.PodcastList.as_view(), name='podcast-list'),
     path('upload/', views.uploadImage, name='image-upload'),
-    path('create/', views.PodcastCreate.as_view(), name='create-podcast'),
+    path('create/', views.PodcastCreateUpdate.as_view(), name='create-podcast'),
     path('newest/', views.PodcastNewestDetail.as_view(), name='newest-podcast'),
 
     
@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('<str:pk>/', views.PodcastDetail.as_view(), name='podcast-get'),
     path('<str:pk>/preview/', views.PodcastPreview.as_view(), name='podcast-get-preview'),
-    path('update/<str:pk>/', views.podcastUpdate, name='podcast-update'),
+    path('update/<str:pk>/', views.PodcastCreateUpdate.as_view(), name='podcast-update'),
     path('delete/<str:pk>/', views.PodcastDelete.as_view(), name='podcast-delete'),
 
 

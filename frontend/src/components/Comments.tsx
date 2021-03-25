@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/comments.scss';
-import TimeAgo from 'javascript-time-ago';
-import pl from 'javascript-time-ago/locale/pl';
 import Loader from '../components/Loader';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { getComments, createComment } from '../actions/commentActions';
@@ -16,10 +14,6 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   const [commentText, setCommentText] = useState('');
   const [commentToDelete, setCommentToDelete] = useState(0);
   const [confirm, setConfirm] = useState(false);
-
-  TimeAgo.addLocale(pl);
-  const timeAgo = new TimeAgo('pl-PL');
-  timeAgo.format(new Date());
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -279,7 +273,6 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
             key={comment.id}
             comment={comment}
             userInfo={userInfo}
-            timeAgo={timeAgo}
             submitEditComment={submitEditComment}
             startStopEditingComment={startStopEditingComment}
             commentDeleteHandler={commentDeleteHandler}

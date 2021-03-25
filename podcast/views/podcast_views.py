@@ -27,14 +27,17 @@ class PodcastList(ListAPIView):
     search_fields = ['title', 'category']
     
 
+
 class PodcastDetail(RetrieveAPIView):
     queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
+
 
     
 class PodcastDelete(DestroyAPIView):
     permission_classes = [IsAdminUser]
     queryset = Podcast.objects.all()
+
 
 
 class PodcastNewestDetail(APIView):
@@ -44,7 +47,8 @@ class PodcastNewestDetail(APIView):
         return Response(serializer.data)
 
 
-class PodcastCreate(APIView):
+
+class PodcastCreateUpdate(APIView):
     permission_classes = [IsAdminUser]
 
     def post(self, request, format=None):
@@ -57,12 +61,28 @@ class PodcastCreate(APIView):
         return Response(serializer.data)
 
 
+    def put(self, request, pk, format=None):
+        data = request.data
+        podcast = Podcast.objects.get(id=pk)
+
+        podcast.title = data['title']
+        podcast.category = data['category']
+        podcast.description = data['description']
+
+        podcast.save()
+        serializer = PodcastSerializer(podcast, many=False)
+
+        return Response(serializer.data)
+
+
+
 class PodcastPreview(APIView):
     def get(self, request, pk, format=None):
         podcasts = Podcast.objects.filter(~Q(id=pk))
         podcast = random.choice(podcasts)
         serializer = PodcastSerializer(podcast, many=False)
         return Response(serializer.data)
+
 
 
 class LikeUnlikeAPIView(APIView):
@@ -111,21 +131,6 @@ class LikeUnlikeAPIView(APIView):
         return Response('Liked-unliked')
 
 
-@api_view(['PUT'])
-@permission_classes([IsAdminUser])
-def podcastUpdate(request, pk):
-    data = request.data
-    podcast = Podcast.objects.get(id=pk)
-
-    podcast.title = data['title']
-    podcast.category = data['category']
-    podcast.description = data['description']
-
-    podcast.save()
-    serializer = PodcastSerializer(podcast, many=False)
-
-    return Response(serializer.data)
-
 
 @api_view(['POST'])
 def uploadImage(request):
@@ -145,12 +150,14 @@ def uploadImage(request):
     return Response('File has been uploaded')
 
 
+
 @api_view(['GET'])
 def getComments(request, pk):
     podcast = Podcast.objects.get(id=pk)
     comments = podcast.comment_set.all()
     serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
+
 
 
 class CommentAPIView(APIView):

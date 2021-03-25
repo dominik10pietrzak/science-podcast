@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/podcast-list.scss';
+
+import TimeAgo from 'javascript-time-ago';
+import pl from 'javascript-time-ago/locale/pl';
+
 import { Link, useHistory } from 'react-router-dom';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { getPodcasts } from '../actions/podcastActions';
@@ -8,6 +12,10 @@ import SearchBar from '../components/SearchBar';
 import Paginate from '../components/Paginate';
 
 const PodcastList: React.FC<{ history: any }> = ({ history }) => {
+  TimeAgo.addLocale(pl);
+  const timeAgo = new TimeAgo('pl-PL');
+  timeAgo.format(new Date());
+
   const playPodcast = (idx: number) => {
     history.push(`/podcast/${podcasts[idx].id}`);
   };
@@ -140,8 +148,22 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
                             ) : (
                               ''
                             )}
+                            <span className='likes-comments-count'>
+                              <i className='far fa-heart like-button'></i>{' '}
+                              {podcast.likes.length}
+                            </span>
+                            <span className='likes-comments-count'>
+                              <i className='far fa-comment comment-button'></i>{' '}
+                              {podcast.commentsCount}
+                            </span>
                           </div>
                           <h1 className='podcast-title'>{podcast.title}</h1>
+                          <div className='additional-info'>
+                            {podcast.category}
+                          </div>
+                          <div className='additional-info'>
+                            {timeAgo.format(Date.parse(podcast.date_added))}
+                          </div>
                         </div>
                       )
                   )}

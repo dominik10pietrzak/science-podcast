@@ -185,7 +185,7 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
 
           {uploading && <Loader />}
           <button className='update-button' type='submit'>
-            Update
+            Aktualizuj
           </button>
         </form>
       )}

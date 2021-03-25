@@ -4,11 +4,13 @@ import '../styles/comment.scss';
 import { useHistory } from 'react-router';
 import Loader from './Loader';
 
+import TimeAgo from 'javascript-time-ago';
+import pl from 'javascript-time-ago/locale/pl';
+
 interface Props {
   comment: any;
   commentId?: number;
   userInfo: any;
-  timeAgo: any;
   submitEditComment: (commentId: number) => void;
   startStopEditingComment: (commentId: number) => void;
   commentDeleteHandler: (commentId: number) => void;
@@ -30,7 +32,6 @@ const Comment: React.FC<Props> = ({
   comment,
   commentId,
   userInfo,
-  timeAgo,
   submitEditComment,
   startStopEditingComment,
   commentDeleteHandler,
@@ -42,6 +43,10 @@ const Comment: React.FC<Props> = ({
   isReply,
 }) => {
   const history = useHistory();
+
+  TimeAgo.addLocale(pl);
+  const timeAgo = new TimeAgo('pl-PL');
+  timeAgo.format(new Date());
 
   return (
     <div
@@ -91,7 +96,7 @@ const Comment: React.FC<Props> = ({
               ) : (
                 <div className='activities'>
                   <i
-                    className={`fas fa-heart like-button ${
+                    className={`far fa-heart like-button ${
                       userInfo &&
                       comment.likes.find(
                         (like: any) => like.user === userInfo.id
@@ -187,7 +192,6 @@ const Comment: React.FC<Props> = ({
               comment={reply}
               commentId={comment.id}
               userInfo={userInfo}
-              timeAgo={timeAgo}
               submitEditComment={submitEditComment}
               startStopEditingComment={startStopEditingComment}
               commentDeleteHandler={commentDeleteHandler}

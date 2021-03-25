@@ -34,6 +34,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
@@ -66,12 +67,14 @@ def getUsers(request):
     return Response(serializer.data)
 
 
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def getUserById(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
+
 
 
 @api_view(['PUT'])
@@ -93,6 +96,7 @@ def updateUserProfile(request):
     return Response(serializer.data)
 
 
+
 @api_view(['POST'])
 def uploadProfileImage(request):
     data = request.data
@@ -104,12 +108,14 @@ def uploadProfileImage(request):
     return Response('File has been uploaded')
 
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
+
 
 
 @api_view(['PUT'])
@@ -129,12 +135,14 @@ def updateUser(request, pk):
     return Response(serializer.data)
 
 
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request, pk):
     user = User.objects.get(id=pk)
     user.delete()
     return Response('User has been deleted')
+
 
 
 @api_view(['POST'])
