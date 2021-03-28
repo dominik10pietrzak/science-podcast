@@ -1,3 +1,5 @@
+@import 'podcast-list';
+
 .search-bar {
   position: relative;
   transition: all 0.5s ease;
@@ -6,23 +8,58 @@
 
   form {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.6rem;
+    cursor: text;
+    border-radius: 10px;
+    width: 100%;
+    background-color: rgb(27, 29, 31);
+
+    i {
+      font-size: 0.5rem;
+    }
+
+    .clear {
+      cursor: pointer;
+      z-index: 500;
+      position: absolute;
+      right: 0;
+      padding: 0.5rem;
+      transition: all 0.3s ease;
+
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
 
     input {
+      display: block;
       border: none;
-      padding: 0.75rem 0.75rem;
-      background-color: rgb(27, 29, 31);
+      background: transparent;
       color: white;
       outline: none;
       width: 100%;
+      padding: 0 0.25rem;
+      transition: all 0.3s ease;
 
       &::placeholder {
         color: white;
       }
+
       &:focus {
         ~ .list {
-          opacity: 1;
+          // opacity: 1;
           pointer-events: auto;
         }
+
+        ~ .categories {
+          opacity: 0;
+        }
+
+        width: 100%;
       }
     }
 
@@ -32,9 +69,18 @@
       top: 2.5rem;
       width: 100%;
       background-color: rgb(27, 29, 31);
-      opacity: 0;
       pointer-events: none;
       z-index: 500;
+      transition: all 0.3s ease;
+
+      &.hidden {
+        opacity: 0;
+        visibility: hidden;
+
+        * {
+          pointer-events: none;
+        }
+      }
 
       .search-podcast-link {
         color: white;

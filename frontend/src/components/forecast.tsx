@@ -9,17 +9,17 @@ const displayDate = () => {
 
   let days = ['Niedz', 'Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob'];
 
-  if (window.innerWidth > 1024) {
-    days = [
-      'Niedziela',
-      'Poniedziałek',
-      'Wtorek',
-      'Środa',
-      'Czwartek',
-      'Piątek',
-      'Sobota',
-    ];
-  }
+  // if (window.innerWidth > 1024) {
+  //   days = [
+  //     'Niedziela',
+  //     'Poniedziałek',
+  //     'Wtorek',
+  //     'Środa',
+  //     'Czwartek',
+  //     'Piątek',
+  //     'Sobota',
+  //   ];
+  // }
 
   const daysOfWeek = [];
 
@@ -44,7 +44,6 @@ const Forecast: React.FC<{
     <div className='forecast'>
       <div className='day-forecast'>
         <h3 className='day-of-week'>{daysOfWeek[0]}</h3>
-        <h3>{Math.round(weatherData.tempIn1D)}&#176;</h3>
         <img
           src={
             require(`../assets/weather-images/${weatherData.descIn1D}.svg`)
@@ -52,13 +51,11 @@ const Forecast: React.FC<{
           }
           alt='1dimg'
         />
-        <span className='forecast-description'>
-          {translate(weatherData.descIn1D)}
-        </span>
+        <h3>{weatherData.tempIn1D}&#176;</h3>
+        <h3 className='wind-speed'>{weatherData.windIn1D}km/h</h3>
       </div>
       <div className='day-forecast'>
         <h3 className='day-of-week'>{daysOfWeek[1]}</h3>
-        <h3>{Math.round(weatherData.tempIn2D)}&#176;</h3>
         <img
           src={
             require(`../assets/weather-images/${weatherData.descIn2D}.svg`)
@@ -66,13 +63,11 @@ const Forecast: React.FC<{
           }
           alt='2dimg'
         />
-        <span className='forecast-description'>
-          {translate(weatherData.descIn2D)}
-        </span>
+        <h3>{weatherData.tempIn2D}&#176;</h3>
+        <h3 className='wind-speed'>{weatherData.windIn2D}km/h</h3>
       </div>
       <div className='day-forecast'>
         <h3 className='day-of-week'>{daysOfWeek[2]}</h3>
-        <h3>{Math.round(weatherData.tempIn3D)}&#176;</h3>
         <img
           src={
             require(`../assets/weather-images/${weatherData.descIn3D}.svg`)
@@ -80,13 +75,11 @@ const Forecast: React.FC<{
           }
           alt='3dimg'
         />
-        <span className='forecast-description'>
-          {translate(weatherData.descIn3D)}
-        </span>
+        <h3>{weatherData.tempIn3D}&#176;</h3>
+        <h3 className='wind-speed'>{weatherData.windIn3D}km/h</h3>
       </div>
       <div className='day-forecast'>
         <h3 className='day-of-week'>{daysOfWeek[3]}</h3>
-        <h3>{Math.round(weatherData.tempIn4D)}&#176;</h3>
         <img
           src={
             require(`../assets/weather-images/${weatherData.descIn4D}.svg`)
@@ -94,13 +87,11 @@ const Forecast: React.FC<{
           }
           alt='4dimg'
         />
-        <span className='forecast-description'>
-          {translate(weatherData.descIn4D)}
-        </span>
+        <h3>{weatherData.tempIn4D}&#176;</h3>
+        <h3 className='wind-speed'>{weatherData.windIn4D}km/h</h3>
       </div>
       <div className='day-forecast'>
         <h3 className='day-of-week'>{daysOfWeek[4]}</h3>
-        <h3>{Math.round(weatherData.tempIn5D)}&#176;</h3>
         <img
           src={
             require(`../assets/weather-images/${weatherData.descIn5D}.svg`)
@@ -108,9 +99,8 @@ const Forecast: React.FC<{
           }
           alt='5dimg'
         />
-        <span className='forecast-description'>
-          {translate(weatherData.descIn5D)}
-        </span>
+        <h3>{weatherData.tempIn5D}&#176;</h3>
+        <h3 className='wind-speed'>{weatherData.windIn5D}km/h</h3>
       </div>
     </div>
   );

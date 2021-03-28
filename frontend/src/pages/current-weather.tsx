@@ -53,21 +53,30 @@ const CurrentWeather: React.FC<{
         <h1 className='temperature'>
           {Math.round(weatherData.currentTemp)}&#176;
         </h1>
-        <span>{translateDescription(weatherData.description)}</span>
-        <div className='description'>
-          <span>H: {weatherData.humidity}% </span>
-          <span>W: {Math.round(weatherData.windSpeed)} km/h</span>
+      </div>
+      <div className='weather-info'>
+        <div className='location'>
+          <span className='date'>
+            {date.dayOfWeek}, {date.dayOfMonth} {date.month}
+          </span>
+          <h3 className='city-name'>{weatherData.city}</h3>
         </div>
+        {/* <div className='description'>
+          <img
+            className='weather-image'
+            src={
+              require(`../assets/weather-images/${weatherData.description}.svg`)
+                .default
+            }
+            alt='weather'
+          />
+          <span>{translateDescription(weatherData.description)}</span>
+        </div> */}
       </div>
-      <div className='location'>
-        <h3 className='city-name'>
-          {weatherData.city}
-          {weatherData.country !== '' ? ', ' + weatherData.country : ''}
-        </h3>
-        <span className='date'>
-          {date.dayOfWeek}, {date.dayOfMonth} {date.month}
-        </span>
-      </div>
+      {/* <div className='description'>
+        <span>Wilgotność: {weatherData.humidity}% </span>
+        <span>Wiatr: {Math.round(weatherData.windSpeed)} km/h</span>
+      </div> */}
     </div>
   );
 };

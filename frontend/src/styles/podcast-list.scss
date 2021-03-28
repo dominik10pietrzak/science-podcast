@@ -1,5 +1,4 @@
 @import 'utils';
-$settings_width: 11.5rem;
 
 .podcast-list {
   position: relative;
@@ -14,42 +13,8 @@ $settings_width: 11.5rem;
     margin: 0;
     margin-bottom: 1rem;
     font-size: 1rem;
-    font-family: 'Quicksand', sans-serif;
+    font-family: $second_font;
     transition: all 0.3s ease 0.3s;
-  }
-
-  .settings {
-    position: -webkit-sticky;
-    position: sticky;
-    align-self: flex-start;
-    top: 2rem;
-    width: #{$settings_width};
-    padding-top: 4rem;
-    padding-right: 1rem;
-    transition: all 0.3s ease 0.25s;
-
-    .categories {
-      display: flex;
-      flex-direction: column;
-
-      .category-button {
-        font-size: 0.6rem;
-        margin: 0.25rem 0;
-        transition: all 0.3s ease;
-        font-family: 'Quicksand', 'sans-serif';
-        cursor: pointer;
-        color: white;
-
-        &.button-active {
-          transform: translateX(15px);
-          color: rgb(192, 192, 192);
-        }
-
-        &:hover {
-          color: rgb(190, 190, 190);
-        }
-      }
-    }
   }
 
   .main {
@@ -182,7 +147,7 @@ $settings_width: 11.5rem;
             .likes-comments-count {
               opacity: 0;
               font-size: 0.55rem;
-              margin-left: 0.25rem;
+              margin-left: 0.5rem;
               transition: all 0.3s ease;
             }
 
@@ -224,7 +189,7 @@ $settings_width: 11.5rem;
   }
 
   &.fade-in-animation {
-    .settings {
+    .search {
       opacity: 0;
     }
 
@@ -312,7 +277,7 @@ $settings_width: 11.5rem;
 
 @media screen and (max-width: 1100px) {
   .podcast-list {
-    .settings {
+    .search {
       width: 10rem;
     }
 
@@ -341,7 +306,7 @@ $settings_width: 11.5rem;
           display: grid;
           justify-content: space-between;
           grid-template-columns: repeat(3, 7rem);
-          grid-row-gap: 2rem;
+          grid-row-gap: 3rem;
           transition: all 0.3s ease;
 
           .podcast-button {
@@ -371,12 +336,20 @@ $settings_width: 11.5rem;
 @media screen and (max-width: 768px) {
   .podcast-list {
     flex-direction: column;
-    .settings {
-      width: 100%;
+
+    .search {
+      width: 12rem;
       position: static;
       padding: 0;
       padding-top: 1rem;
+
+      .categories {
+        .category-button {
+          height: 3.5rem;
+        }
+      }
     }
+
     .main {
       width: 100%;
       padding: 3rem 1rem;
@@ -434,7 +407,7 @@ $settings_width: 11.5rem;
 @media screen and (max-width: 420px) {
   .podcast-list {
     flex-direction: column;
-    .settings {
+    .search {
       width: 100%;
       position: static;
       padding: 0;

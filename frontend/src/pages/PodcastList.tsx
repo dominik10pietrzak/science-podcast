@@ -10,6 +10,7 @@ import { getPodcasts } from '../actions/podcastActions';
 import Loader from '../components/Loader';
 import SearchBar from '../components/SearchBar';
 import Paginate from '../components/Paginate';
+import Search from '../components/Search';
 
 const PodcastList: React.FC<{ history: any }> = ({ history }) => {
   TimeAgo.addLocale(pl);
@@ -56,49 +57,13 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
     }, 25);
   };
 
-  const chooseCategory = (e: Event) => {
-    const activeButton = e.target as HTMLElement;
-
-    if (activeButton.innerText === 'Wszystkie') {
-      history.push(`/podcast/`);
-    } else {
-      history.push(`/podcast/?search=${activeButton.innerText}&page=1`);
-    }
-  };
-
   return (
     <div className='podcast-list fade-in-animation'>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <div className='settings'>
-            <SearchBar />
-            <h3 className='heading'>Kategorie</h3>
-            <div className='categories'>
-              <span
-                className={`category-button`}
-                onClick={(e: any) => chooseCategory(e)}>
-                Wszystkie
-              </span>
-              <span
-                className={`category-button`}
-                onClick={(e: any) => chooseCategory(e)}>
-                Kosmos
-              </span>
-              <span
-                className={`category-button`}
-                onClick={(e: any) => chooseCategory(e)}>
-                Technologia
-              </span>
-              <span
-                className={`category-button`}
-                onClick={(e: any) => chooseCategory(e)}>
-                Klimat
-              </span>
-            </div>
-          </div>
-
+          <Search />
           <div className='main' onLoad={fadeInList}>
             {podcasts[0] && !keyword ? (
               <div className='newest-podcast'>
@@ -123,9 +88,9 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
             )}
             <div className='newest-list'>
               {keyword ? (
-                <h3 className='heading'>{keywordValue}:</h3>
+                <h3 className='heading'>{keywordValue}</h3>
               ) : (
-                <h3 className='heading'>Najnowsze podcasty:</h3>
+                <h3 className='heading'>Najnowsze podcasty</h3>
               )}
 
               <div className='content'>

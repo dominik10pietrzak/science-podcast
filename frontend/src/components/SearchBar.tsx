@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import '../styles/search-bar.scss';
@@ -6,7 +6,10 @@ import { getPodcasts } from '../actions/podcastActions';
 import axios from 'axios';
 import Loader from './Loader';
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<{ setInputValue: any; inputValue: string }> = ({
+  setInputValue,
+  inputValue,
+}) => {
   const [podcasts, setPodcasts] = useState([] as any);
   const [loading, setLoading] = useState(false);
 
@@ -52,21 +55,42 @@ const SearchBar: React.FC = () => {
     }
   };
 
+  const clearForm = () => {
+    focusOnForm();
+    setKeyword('');
+    setInputValue('');
+    (document.getElementById('search-input') as HTMLInputElement).value = '';
+  };
+
+  const focusOnForm = () => {
+    document.getElementById('search-input')?.focus();
+  };
+
+  const searchInput = document.getElementById(
+    'search-input'
+  ) as HTMLInputElement;
+
   return (
     <div className='search-bar'>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} onClick={focusOnForm}>
+        <i className='fas fa-search'></i>
         <input
           id='search-input'
           type='text'
           placeholder='Szukaj podcastów'
           autoComplete='off'
-          value={keyword}
           onChange={(e) => {
             setKeyword(e.target.value);
+            setInputValue(e.target.value);
             changeHandler(e.target.value);
           }}
         />
-        <div className='list'>
+        <i
+          className={`fas fa-times clear ${
+            searchInput && searchInput.value !== '' ? '' : 'hidden'
+          }`}
+          onClick={clearForm}></i>
+        <div className={`list ${inputValue === '' ? 'hidden' : ''}`}>
           {loading ? (
             <Loader />
           ) : (

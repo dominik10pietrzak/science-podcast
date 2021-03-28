@@ -1,48 +1,72 @@
+@import 'utils';
+
 .current-weather {
   display: flex;
   width: 100%;
+  margin: 1rem 0;
   align-items: center;
+  font-family: $font_montserrat;
 
   .left {
     display: flex;
     flex-direction: column;
-    margin-right: 4rem;
     text-align: center;
 
     .temperature {
-      font-size: 4rem;
+      font-size: 5rem;
       margin: 0 0.25rem;
-      font-weight: bold;
       display: block;
     }
+
     span {
       font-weight: lighter;
       margin: 0.5rem 0;
     }
+
     .description {
       width: 7rem;
+      font-size: 0.6rem;
       display: flex;
       justify-content: space-between;
     }
   }
 
-  .location {
-    text-transform: uppercase;
-
-    .city-name {
-      font-size: 2rem;
-      margin: 0.5rem 0;
-    }
-
-    .date {
-      font-weight: lighter;
-    }
-  }
-
-  .weather-conditions {
+  .weather-info {
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
+    align-items: flex-end;
+    font-size: 0.7rem;
+
+    .location {
+      margin: 0 1rem;
+
+      .city-name {
+        font-size: 2rem;
+        margin: 0;
+        font-weight: normal;
+      }
+
+      .date {
+        font-weight: lighter;
+        margin: 0;
+      }
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: lighter;
+
+      .weather-image {
+        width: 1.5rem;
+      }
+    }
+
+    .weather-conditions {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
   }
 }
 
@@ -62,7 +86,10 @@
         justify-content: space-around;
       }
     }
+
     .location {
+      text-align: center;
+
       .city-name {
         font-size: 1.5rem;
       }

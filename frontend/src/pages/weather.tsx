@@ -37,13 +37,10 @@ class Weather extends Component {
 
     const API = `https://api.openweathermap.org/data/2.5/forecast?q=${value}&appid=${this.state.APIKey}&units=metric`;
 
-    backgroundFile &&
-      setTimeout(() => {
-        backgroundFile.style.opacity = '0';
-      }, 15);
-
     try {
       const { data } = await axios.get(API);
+
+      console.log(data);
 
       let index = 0;
       for (let i = 0; i < 8; i++) {
@@ -61,16 +58,21 @@ class Weather extends Component {
         humidity: data.list[0].main.humidity,
         windSpeed: data.list[0].wind.speed,
         description: data.list[0].weather[0].main,
-        tempIn1D: data.list[index].main.temp,
-        tempIn2D: data.list[index + 8].main.temp,
-        tempIn3D: data.list[index + 16].main.temp,
-        tempIn4D: data.list[index + 24].main.temp,
-        tempIn5D: data.list[index + 32].main.temp,
+        tempIn1D: Math.round(data.list[index].main.temp),
+        tempIn2D: Math.round(data.list[index + 8].main.temp),
+        tempIn3D: Math.round(data.list[index + 16].main.temp),
+        tempIn4D: Math.round(data.list[index + 24].main.temp),
+        tempIn5D: Math.round(data.list[index + 32].main.temp),
         descIn1D: data.list[index].weather[0].main,
         descIn2D: data.list[index + 8].weather[0].main,
         descIn3D: data.list[index + 16].weather[0].main,
         descIn4D: data.list[index + 24].weather[0].main,
         descIn5D: data.list[index + 32].weather[0].main,
+        windIn1D: Math.round(data.list[index].wind.speed),
+        windIn2D: Math.round(data.list[index + 8].wind.speed),
+        windIn3D: Math.round(data.list[index + 16].wind.speed),
+        windIn4D: Math.round(data.list[index + 24].wind.speed),
+        windIn5D: Math.round(data.list[index + 32].wind.speed),
       });
 
       backgroundFile &&
@@ -83,8 +85,7 @@ class Weather extends Component {
     }
     setTimeout(() => {
       this.setState({ loading: false });
-      this.showWeatherData();
-    }, 300);
+    }, 15);
   };
 
   searchForWeather = (e: React.FormEvent) => {
@@ -116,7 +117,7 @@ class Weather extends Component {
     const { loading, value } = this.state;
 
     return (
-      <div className='weather'>
+      <div className='weather' onLoad={this.showWeatherData}>
         {/* <img
 					className='background'
 					src={
@@ -126,14 +127,15 @@ class Weather extends Component {
 					alt='weather-img'
 				/> */}
         {window.innerWidth > 420 ? (
-          <video
-            className='background'
-            autoPlay
-            muted
-            loop
-            id='myVideo'
-            src={videoUrl}
-          />
+          // <video
+          //   className='background'
+          //   autoPlay
+          //   muted
+          //   loop
+          //   id='myVideo'
+          //   src={videoUrl}
+          // />
+          <img className='background' src={imageUrl} alt='bg' />
         ) : (
           <img className='background' src={imageUrl} alt='bg' />
         )}
