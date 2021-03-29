@@ -40,8 +40,6 @@ class Weather extends Component {
     try {
       const { data } = await axios.get(API);
 
-      console.log(data);
-
       let index = 0;
       for (let i = 0; i < 8; i++) {
         const hour = new Date(data.list[i].dt_txt).getHours();

@@ -23,7 +23,6 @@ export const getPodcastDetails = (id: number) => async (dispatch: Function) => {
     dispatch({ type: 'PODCAST_DETAILS_REQUEST' });
 
     const { data } = await axios.get(`/api/podcast/${id}`);
-    console.log(data);
 
     dispatch({ type: 'PODCAST_DETAILS_SUCCESS', payload: data });
   } catch (error) {

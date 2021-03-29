@@ -27,7 +27,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
       const { data } = await axios.get(`/api/podcast/${podcastId}/preview/`);
 
       setPodcastPreview(data);
-      console.log(podcastPreview);
     } catch (error) {
       console.log(error);
     }
