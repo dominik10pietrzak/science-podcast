@@ -29,7 +29,9 @@ const Search: React.FC<{}> = ({}) => {
     <div className='search'>
       <h3 className='heading'>Szukaj</h3>
       <SearchBar setInputValue={setInputValue} inputValue={inputValue} />
-      <h3 className='heading'>Kategorie</h3>
+      <h3 className={`heading ${inputValue === '' ? '' : 'hidden'}`}>
+        Kategorie
+      </h3>
       <div className={`categories ${inputValue === '' ? '' : 'hidden'}`}>
         <div
           className={`category-button`}

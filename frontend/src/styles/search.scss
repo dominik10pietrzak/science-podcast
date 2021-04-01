@@ -11,8 +11,14 @@
   transition: all 0.3s ease 0.25s;
 
   .heading {
+    transition: all 0s ease 0s !important;
     &:nth-of-type(2) {
       font-size: 0.7rem !important;
+    }
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
   }
 

@@ -49,7 +49,15 @@ const CurrentWeather: React.FC<{
   const date = displayDate();
   return (
     <div className='current-weather'>
-      <div className='left'>
+      <div className='temp'>
+        <img
+          className='weather-image'
+          src={
+            require(`../assets/weather-images/${weatherData.description}.svg`)
+              .default
+          }
+          alt='weather'
+        />
         <h1 className='temperature'>
           {Math.round(weatherData.currentTemp)}&#176;
         </h1>
@@ -57,9 +65,16 @@ const CurrentWeather: React.FC<{
       <div className='weather-info'>
         <div className='location'>
           <span className='date'>
-            {date.dayOfWeek}, {date.dayOfMonth} {date.month}
+            {translateDescription(weatherData.description)}
           </span>
-          <h3 className='city-name'>{weatherData.city}</h3>
+          {/* <span className='date'>
+            {date.dayOfWeek}, {date.dayOfMonth} {date.month}
+          </span> */}
+          <h3 className='city-name'>
+            <i className='fas fa-map-marker-alt'></i>
+            {weatherData.city}
+            {weatherData.country !== '' ? ', ' + weatherData.country : ''}
+          </h3>
         </div>
         {/* <div className='description'>
           <img

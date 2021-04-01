@@ -2,14 +2,16 @@
 
 .weather {
   height: 100vh;
+  width: 100%;
   padding: 0 $page_padding_x;
-  padding-top: 8rem;
+  padding-top: 5rem;
   background-color: black;
   color: white;
   position: relative;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
+  justify-content: center;
+  align-items: center;
 
   .background {
     position: absolute;
@@ -18,8 +20,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.2s ease;
-    opacity: 0;
+    z-index: 0;
+    transition: all 0.3s ease;
+
+    &:first-of-type {
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    &.hidden {
+      opacity: 0;
+    }
   }
 
   &::after {
@@ -29,18 +40,25 @@
     height: 100%;
     left: 0;
     top: 0;
-    background-color: black;
-    opacity: 0.35;
+    z-index: 1;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 1)
+    );
+    opacity: 1;
   }
 
   .weather-content {
+    width: 100%;
+    width: 45rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    position: inherit;
-    z-index: 5;
-    width: 100%;
+    align-items: center;
     transition: all 0.3s ease;
+    z-index: 5;
 
     &.content-hidden {
       opacity: 0;
@@ -49,7 +67,7 @@
     .search-form {
       display: flex;
       align-items: flex-end;
-      width: 15rem;
+      width: 100%;
 
       input,
       button {
@@ -115,6 +133,7 @@
     justify-content: center;
 
     .weather-content {
+      width: 100%;
     }
   }
 }

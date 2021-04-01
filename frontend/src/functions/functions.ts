@@ -1,22 +1,22 @@
 export const translateDescription = (desc: string) => {
   switch (desc) {
     case 'Clouds':
-      desc = 'Chmury';
+      desc = 'Zachmurzenie';
       break;
     case 'Clear':
-      desc = 'Słońce';
+      desc = 'Bezchmurnie';
       break;
 
     case 'Rain':
-      desc = 'Deszcz';
+      desc = 'Opady deszczu';
       break;
 
     case 'Storm':
-      desc = 'Burza';
+      desc = 'Burza z piorunami';
       break;
 
     case 'Snow':
-      desc = 'Śnieg';
+      desc = 'Opady śniegu';
       break;
   }
 

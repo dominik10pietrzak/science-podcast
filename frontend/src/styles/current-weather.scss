@@ -5,17 +5,25 @@
   width: 100%;
   margin: 1rem 0;
   align-items: center;
+  justify-content: center;
   font-family: $font_montserrat;
 
-  .left {
+  .temp {
     display: flex;
-    flex-direction: column;
     text-align: center;
 
+    img {
+      width: 3.5rem;
+      margin-right: 0.5rem;
+    }
+
     .temperature {
-      font-size: 5rem;
-      margin: 0 0.25rem;
+      font-size: 4.5rem;
+      margin: 0;
+      padding: 0 1rem;
+      font-weight: normal;
       display: block;
+      // border-right: solid 1px rgba($color: #ffffff, $alpha: 0.1);
     }
 
     span {
@@ -39,15 +47,23 @@
     .location {
       margin: 0 1rem;
 
+      i {
+        font-size: 1.25rem;
+        margin-right: 0.5rem;
+      }
+
       .city-name {
+        display: flex;
+        align-items: center;
         font-size: 2rem;
         margin: 0;
+        text-transform: uppercase;
         font-weight: normal;
       }
 
       .date {
-        font-weight: lighter;
         margin: 0;
+        font-style: italic;
       }
     }
 
@@ -74,9 +90,14 @@
   .current-weather {
     flex-direction: column-reverse;
     align-items: center;
-    margin: 1.5rem 0;
+    margin: {
+      top: 1.5rem;
+      bottom: 0;
+    }
 
-    .left {
+    .temp {
+      justify-content: center;
+      align-items: center;
       width: 100%;
       margin: 0;
       margin-top: 1rem;
@@ -85,13 +106,28 @@
         width: 100%;
         justify-content: space-around;
       }
+
+      .weather-image {
+        height: auto;
+        width: 2rem;
+      }
+
+      .temperature {
+        padding-right: 0;
+        font-size: 3rem;
+      }
     }
 
-    .location {
-      text-align: center;
+    .weather-info {
+      .location {
+        text-align: center;
 
-      .city-name {
-        font-size: 1.5rem;
+        .date {
+        }
+
+        .city-name {
+          font-size: 1.25rem;
+        }
       }
     }
   }
