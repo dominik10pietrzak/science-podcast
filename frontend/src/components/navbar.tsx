@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { logout } from '../actions/userActions';
 import { useHistory } from 'react-router';
+import logo from '../assets/logo.png';
 import '../styles/navbar.scss';
 
 import { Link } from 'react-router-dom';
@@ -18,8 +19,11 @@ const Navbar: React.FC = () => {
     const sliders = document.querySelectorAll('.navigation-button .slider');
 
     menuButtons.forEach((button, idx) => {
+      // button.setAttribute('data-before', (button as HTMLElement).innerText);
+
       button.addEventListener('mouseenter', () => {
         (button as HTMLElement).style.justifyContent = 'flex-start';
+        // (button as HTMLElement).style.clipPath = '';
         (sliders[idx] as HTMLElement).style.width = '100%';
       });
 
@@ -69,7 +73,11 @@ const Navbar: React.FC = () => {
   return (
     <div className='navbar navbar-active'>
       <Link to='/' className='name'>
-        <h3>NaukowyPodcast</h3>
+        <img src={logo} alt='logo' />
+        <h3>
+          <strong>Naukowy</strong>
+          Podcast
+        </h3>
       </Link>
       <div className='menu'>
         <div className='main-menu'>

@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   z-index: 100;
+  // background-color: rgb(31, 32, 34);
 
   &.static {
     top: 0;
@@ -32,14 +33,23 @@
   }
 
   .name {
-    margin-right: 3rem;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+    font-weight: normal;
     color: white;
     text-decoration: none;
-    text-transform: uppercase;
+    font-family: $roboto;
+    font-size: 1.5rem;
+
+    img {
+      height: 1rem;
+    }
 
     h3 {
+      margin-left: 0.25rem;
       font-size: 1rem;
+      font-weight: lighter;
     }
   }
 
@@ -53,13 +63,12 @@
       justify-content: flex-start;
       align-items: center;
       color: white;
-      margin: 0 0.6rem;
+      margin: 0 0.7rem;
       padding: 0.2rem 0;
-      text-transform: uppercase;
       text-decoration: none;
-      font-weight: 500;
       font-size: 0.6rem;
       cursor: pointer;
+      font-family: $third_font;
 
       i {
         margin-left: 0.5rem;

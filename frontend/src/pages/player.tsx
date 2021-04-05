@@ -137,6 +137,23 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     history.go(0);
   };
 
+  const setPreviewBackground = () => {
+    const preview = document.querySelector(
+      '.next-podcast-preview'
+    ) as HTMLElement;
+
+    if (preview) {
+      preview.style.backgroundColor = `rgba${podcastPreview.dominant_color.slice(
+        0,
+        -1
+      )}, .5)`;
+    }
+
+    setTimeout(() => {
+      preview.classList.remove('hidden');
+    }, 1500);
+  };
+
   return (
     <div className='player fade-in-animation'>
       {loading ? (
@@ -165,7 +182,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
             <div className='wrapper'>
               <div className='flex-container'>
                 <div className='podcast-data'>
-                  <span className='category'>{podcast.category}</span>
                   <h1 className='title'>{podcast.title}</h1>
                   <div className='activities'>
                     <span className='activity'>
@@ -184,45 +200,45 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                     </span>
                   </div>
                   <p className='description'>{podcast.description}</p>
-                  {podcast.file && (
-                    <audio
-                      controls
-                      preload='auto'
-                      id='podcast-audio-file'
-                      autoPlay>
-                      <source src={podcast.file} type='audio/mpeg' />
-                    </audio>
-                  )}
+                  <iframe
+                    title={podcast.title}
+                    className='audio-player'
+                    src={`https://open.spotify.com/embed-podcast/episode/${podcast.code}`}
+                    width='100%'
+                    frameBorder='0'
+                    allowTransparency
+                    allow='encrypted-media'
+                    onLoad={(e) =>
+                      ((e.target as HTMLElement).style.opacity = '1')
+                    }></iframe>
                 </div>
               </div>
             </div>
           </div>
           {podcastPreview.title && (
-            <div className='next-podcast-preview'>
+            <div
+              className='next-podcast-preview hidden'
+              onLoad={setPreviewBackground}>
+              <div
+                className='hide-btn'
+                onClick={() =>
+                  (document.querySelector(
+                    '.next-podcast-preview'
+                  ) as HTMLElement).classList.add('hidden')
+                }>
+                <i className='fas fa-times'></i>
+              </div>
               <div className='wrapper'>
                 <span className='heading-preview'>Posłuchaj także:</span>
-                <h3>{podcastPreview.title}</h3>
-                <span className='preview-link' onClick={handleGoNext}>
-                  Przejdź
+                <span onClick={handleGoNext}>
+                  <h3 className='preview-title'>{podcastPreview.title}</h3>
                 </span>
               </div>
-              <div className='wrapper'>
-                <img
-                  src={podcastPreview.cover}
-                  alt='preview-cover'
-                  onLoad={(e) => loadImage(e.target)}
-                />
-                <div>
-                  <span className='preview-likes'>
-                    <i className='far fa-heart'></i>{' '}
-                    {podcastPreview.likes.length}
-                  </span>
-                  <span className='preview-likes'>
-                    <i className='far fa-comment comment-button'></i>{' '}
-                    {podcast.commentsCount}
-                  </span>
-                </div>
-              </div>
+              <img
+                src={podcastPreview.cover}
+                alt='preview-cover'
+                onLoad={(e) => loadImage(e.target)}
+              />
             </div>
           )}
         </>

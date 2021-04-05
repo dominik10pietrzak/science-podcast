@@ -11,8 +11,19 @@
   align-items: center;
   transition: all 0.15s ease;
 
+  .content {
+    transition: all 2s ease;
+  }
+
   &.admin-panel-hidden {
-    opacity: 0;
+    .content {
+      opacity: 0;
+    }
+  }
+
+  .loader {
+    position: absolute;
+    top: 50vh;
   }
 
   th {

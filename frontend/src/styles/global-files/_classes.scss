@@ -1,0 +1,31 @@
+.basic-button {
+  font-size: 0.6rem;
+  padding: 0.7rem 1.15rem;
+  display: block;
+  width: fit-content;
+  border: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: $main_font;
+  background: transparentize($color: black, $amount: 0.8);
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  i {
+    margin-left: 5px;
+  }
+
+  &:hover {
+    background: transparentize($color: black, $amount: 0.5);
+  }
+}
+
+.simple-button {
+  font-size: 0.7rem;
+  color: white;
+  width: fit-content;
+  border-bottom: solid 2px white;
+  cursor: pointer;
+}

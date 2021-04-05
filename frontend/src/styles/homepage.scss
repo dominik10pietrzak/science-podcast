@@ -4,8 +4,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: black;
   color: white;
+
+  *:not(i) {
+    font-family: $third_font;
+  }
 
   &::after {
     content: '';
@@ -15,7 +18,7 @@
     left: 0;
     top: 0;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .section-preview {
@@ -23,15 +26,15 @@
     padding: 10rem $page_padding_x;
     height: 100vh;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     position: relative;
 
     &:nth-of-type(even) {
       justify-content: flex-end;
-      text-align: right;
+      align-items: flex-end;
 
       .text-content {
-        align-items: flex-end;
+        align-items: right;
       }
     }
 
@@ -62,36 +65,52 @@
         transform: translateY(25px);
       }
 
-      h3 {
-        text-transform: uppercase;
-        font-weight: normal;
-        font-size: 1rem;
+      .upper-heading {
+        font-weight: lighter;
+        font-size: 0.9rem;
+        font-family: $third_font;
         margin: 0;
       }
 
       .podcast-title {
-        font-size: 2.25rem;
-        text-transform: uppercase;
+        font-family: $roboto;
+        font-weight: normal;
+        width: 36rem;
+        max-width: 100%;
+        font-size: 4rem;
         margin: 0.5rem 0;
       }
 
-      .basic-button {
+      .description {
+        margin: {
+          top: 0.5rem;
+          bottom: 0;
+        }
+        width: 22rem;
+        max-width: 100%;
         font-size: 0.6rem;
-        padding: 0.6rem 1.15rem;
-        display: block;
-        width: fit-content;
-        border: solid 2px white;
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: bold;
+        font-weight: 500;
+        font-family: $second_font;
+        line-height: 1.15rem;
         color: white;
-        transition: all 0.3s ease;
+      }
+
+      .basic-button {
+        margin-top: 1rem;
+        background: transparentize($color: black, $amount: 0.7);
 
         &:hover {
-          background-color: white;
-          color: black;
+          background: transparentize($color: black, $amount: 0.5);
+        }
+
+        i {
+          font: none;
         }
       }
+    }
+
+    .about-us {
+      background-color: $main_bg_color;
     }
   }
 }
@@ -100,12 +119,28 @@
   @media screen and (max-width: $width) {
     .landing {
       .section-preview {
-        padding: 4rem $padding;
+        padding: 5rem $padding;
 
         .text-content {
           .podcast-title {
             font-size: 1.5rem;
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .landing {
+    .section-preview {
+      .text-content {
+        .podcast-title {
+          width: 100%;
+          font-weight: bold;
+        }
+        .description {
+          width: 100%;
         }
       }
     }

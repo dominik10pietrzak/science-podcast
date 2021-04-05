@@ -4,12 +4,10 @@ import '../styles/podcast-list.scss';
 import TimeAgo from 'javascript-time-ago';
 import pl from 'javascript-time-ago/locale/pl';
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { getPodcasts } from '../actions/podcastActions';
 import Loader from '../components/Loader';
-import SearchBar from '../components/SearchBar';
-import Paginate from '../components/Paginate';
 import Search from '../components/Search';
 
 const PodcastList: React.FC<{ history: any }> = ({ history }) => {
@@ -35,7 +33,9 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
 
   useEffect(() => {
     (document.querySelector('.navbar') as HTMLElement).classList.add('static');
-    dispatch(getPodcasts(keyword));
+    if (podcasts.length === 0) {
+      dispatch(getPodcasts(keyword));
+    }
 
     return () =>
       (document.querySelector('.navbar') as HTMLElement).classList.remove(
@@ -67,17 +67,19 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
           <div className='main' onLoad={fadeInList}>
             {podcasts[0] && !keyword ? (
               <div className='newest-podcast'>
-                <img
-                  className='main-cover'
-                  src={podcasts[0].cover}
-                  alt='cover'
-                  onLoad={(e) => loadImage(e.target)}
-                />
+                <div className='main-cover'>
+                  <img
+                    className='main-cover'
+                    src={podcasts[0].cover}
+                    alt='cover'
+                    onLoad={(e) => loadImage(e.target)}
+                  />
+                </div>
                 <div className='newest-podcast-data'>
                   <h1>{podcasts[0].title}</h1>
                   <p>{podcasts[0].description}</p>
                   <Link
-                    className='newest-button'
+                    className='basic-button'
                     to={`/podcast/${podcasts[0].id}`}>
                     Słuchaj
                   </Link>

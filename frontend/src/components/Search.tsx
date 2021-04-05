@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/search.scss';
 import { useHistory } from 'react-router';
 import SearchBar from './SearchBar';
@@ -16,9 +16,8 @@ const Search: React.FC<{}> = ({}) => {
   const chooseCategory = (e: Event) => {
     const activeButton = e.target as HTMLElement;
 
-    console.log(activeButton);
-
     history.push(`/podcast/?search=${activeButton.innerText}&page=1`);
+    history.go(0);
   };
 
   const searchInput = document.getElementById(
@@ -35,7 +34,10 @@ const Search: React.FC<{}> = ({}) => {
       <div className={`categories ${inputValue === '' ? '' : 'hidden'}`}>
         <div
           className={`category-button`}
-          onClick={() => history.push(`/podcast/`)}>
+          onClick={() => {
+            history.push(`/podcast/`);
+            history.go(0);
+          }}>
           <span>Wszystkie</span>
           <img src={podcastBG} alt='podcast' />
         </div>

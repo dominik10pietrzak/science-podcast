@@ -6,6 +6,10 @@
   width: 100%;
   margin-bottom: 1rem;
 
+  .loader {
+    position: initial;
+  }
+
   form {
     display: flex;
     align-items: center;
@@ -13,7 +17,7 @@
     padding: 0.5rem 0.5rem;
     font-size: 0.6rem;
     cursor: text;
-    border-radius: 10px;
+    border-radius: 7px;
     width: 100%;
     background-color: rgb(27, 29, 31);
 
@@ -98,7 +102,7 @@
         }
 
         div {
-          width: 100%;
+          width: calc(100% - 2.5rem);
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
@@ -119,11 +123,17 @@
           }
         }
 
-        img {
+        .cover {
           width: 2rem;
           height: 2rem;
-          margin: 0;
           margin-right: 0.5rem;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-position: center;
+            object-fit: cover;
+          }
         }
 
         &:hover {

@@ -102,10 +102,15 @@ const Landing: React.FC = () => {
         />
         {podcast && podcast.title ? (
           <div className='text-content hidden'>
-            <h3>Najnowszy podcast</h3>
-            <h1 className='podcast-title'>{podcast && podcast.title}</h1>
+            {/* <h1 className='podcast-title'>{podcast && podcast.title}</h1> */}
+            <h1 className='podcast-title'>Podcast popularno naukowy</h1>
+            <p className='description'>
+              Prowadzącym podcastu jest Łukasz Zduńczyk, dziennikarz Radia
+              Kampus. Już teraz słuchaj podcastów o tematyce takiej jak kosmos,
+              klimat czy technologia.
+            </p>
             <Link to={`/podcast`} className='basic-button' id='podcast-button'>
-              Przejdź do podcastu
+              Przejdź
             </Link>
           </div>
         ) : loading ? (
@@ -114,29 +119,7 @@ const Landing: React.FC = () => {
           ''
         )}
       </div>
-      <div className='podcast-preview section-preview'>
-        <img
-          className='background-image'
-          src={backgroundWeather}
-          alt='sky'
-          onLoad={loadImage}
-        />
-        {temp !== 0 ? (
-          <div className='text-content hidden'>
-            <h3>Pogoda w Warszawie</h3>
-            <h1 className='podcast-title'>
-              {Math.round(temp)}&#176; {translateDescription(desc)}
-            </h1>
-            <Link to={`/weather`} className='basic-button' id='podcast-button'>
-              Przejdź do prognozy
-            </Link>
-          </div>
-        ) : weatherLoading ? (
-          <Loader />
-        ) : (
-          ''
-        )}
-      </div>
+      {/* <div className='section-preview about'></div> */}
     </div>
   );
 };

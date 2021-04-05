@@ -113,7 +113,7 @@ const AdminPanel: React.FC<{ history: any }> = ({ history }) => {
       {podcastsLoading || usersLoading ? (
         <Loader />
       ) : (
-        <>
+        <div className='content'>
           {showPanel()}
           <h1>Panel Administratora</h1>
           <div className='admin_users-list list-container'>
@@ -208,7 +208,7 @@ const AdminPanel: React.FC<{ history: any }> = ({ history }) => {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

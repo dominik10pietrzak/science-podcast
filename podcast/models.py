@@ -30,7 +30,7 @@ class Podcast(models.Model):
     cover = models.ImageField(null=True, blank=True, default='placeholder.png')
     background = models.ImageField(null=True, blank=True, default='placeholder.png')
     dominant_color = models.CharField(max_length=20, null=True, blank=True)
-    file = models.FileField(null=False, blank=False)
+    code = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     

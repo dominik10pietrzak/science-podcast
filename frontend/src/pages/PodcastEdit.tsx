@@ -19,7 +19,7 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
   const [description, setDescription] = useState('description');
   const [cover, setCover] = useState('cover');
   const [background, setBackground] = useState('background');
-  const [file, setFile] = useState('file');
+  const [code, setCode] = useState('code');
   const [uploading, setUploading] = useState(false);
 
   const { podcast, loading } = useSelector(
@@ -45,7 +45,7 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
         setDescription(podcast.description);
         setCover(podcast.cover);
         setBackground(podcast.background);
-        setFile(podcast.file);
+        setCode(podcast.code);
       }
     }
     onLoadAnimations();
@@ -64,7 +64,9 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(updatePodcast({ id: podcast.id, title, description, category }));
+    dispatch(
+      updatePodcast({ id: podcast.id, title, description, category, code })
+    );
   };
 
   const uploadFileHandler = (type: string) => async (
@@ -125,29 +127,19 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
             onChange={(e) => setCategory(e.target.value)}
           />
 
+          <label>Kod</label>
+          <input
+            placeholder='Wprowadź opis'
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+
           <label>Opis</label>
           <textarea
             placeholder='Wprowadź opis'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-
-          <h3 className='heading'>Podcast</h3>
-          <input
-            type='text'
-            placeholder='Description'
-            value={file}
-            disabled
-            onChange={(e) => setFile(e.target.value)}
-          />
-          <div className='file-form'>
-            <input
-              type='file'
-              placeholder='Description'
-              onChange={uploadFileHandler('audio')}
-            />
-            <button>Zmień plik audio</button>
-          </div>
 
           <h3 className='heading'>Okładka</h3>
           <input

@@ -100,7 +100,9 @@ const SearchBar: React.FC<{ setInputValue: any; inputValue: string }> = ({
                 className='search-podcast-link'
                 key={idx}
                 to={`/podcast/${podcast.id}`}>
-                <img src={podcast.cover} alt='cover' />
+                <div className='cover'>
+                  <img src={podcast.cover} alt='cover' />
+                </div>
                 <div className='data'>
                   <h3 className='podcast-title'>{podcast.title}</h3>
                   <h6 className='category'>{podcast.category}</h6>
