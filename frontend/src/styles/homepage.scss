@@ -56,9 +56,9 @@
     }
 
     .text-content {
-      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
+      transition: all 0.3s ease;
 
       &.hidden {
         opacity: 0;

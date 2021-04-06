@@ -11,6 +11,7 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState([] as any);
   const [podcastPreview, setPodcastPreview] = useState({}) as any;
+  const [playerLoading, setPlayerLoading] = useState(true);
   const [mobileLayout, setMobileLayout] = useState(window.innerWidth < 420);
 
   const dispatch = useDispatch();
@@ -154,6 +155,11 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     }, 1500);
   };
 
+  const handleSpotifyLoad = (player: any) => {
+    setPlayerLoading(false);
+    player.style.opacity = '1';
+  };
+
   return (
     <div className='player fade-in-animation'>
       {loading ? (
@@ -200,17 +206,18 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                     </span>
                   </div>
                   <p className='description'>{podcast.description}</p>
-                  <iframe
-                    title={podcast.title}
-                    className='audio-player'
-                    src={`https://open.spotify.com/embed-podcast/episode/${podcast.code}`}
-                    width='100%'
-                    frameBorder='0'
-                    allowTransparency
-                    allow='encrypted-media'
-                    onLoad={(e) =>
-                      ((e.target as HTMLElement).style.opacity = '1')
-                    }></iframe>
+                  <div className='spotify-wrapper'>
+                    <iframe
+                      title={podcast.title}
+                      className='audio-player'
+                      src={`https://open.spotify.com/embed-podcast/episode/${podcast.code}`}
+                      width='100%'
+                      frameBorder='0'
+                      allowTransparency
+                      allow='encrypted-media'
+                      onLoad={(e) => handleSpotifyLoad(e.target)}></iframe>
+                    {playerLoading && <Loader />}
+                  </div>
                 </div>
               </div>
             </div>

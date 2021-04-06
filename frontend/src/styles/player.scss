@@ -137,12 +137,27 @@
         color: rgb(212, 212, 212);
       }
 
-      .audio-player {
-        margin-top: $player_margin;
+      .spotify-wrapper {
+        position: relative;
         width: 22rem;
         height: 6.1rem;
-        opacity: 0;
-        transition: all 1s ease;
+
+        .audio-player {
+          margin-top: $player_margin;
+          height: inherit;
+          width: inherit;
+          opacity: 0;
+          transition: all 1s ease;
+        }
+
+        .loader {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+        }
       }
     }
   }
@@ -227,6 +242,7 @@
     &.hidden {
       opacity: 0;
       transform: translateY(100%);
+      pointer-events: none;
     }
   }
 
@@ -370,10 +386,7 @@
               color: white;
             }
 
-            audio {
-              width: 100%;
-            }
-            .audio-player {
+            .spotify-wrapper {
               width: 100%;
             }
           }

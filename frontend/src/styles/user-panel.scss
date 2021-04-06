@@ -9,6 +9,13 @@ $liked_width: 12rem;
   color: white;
   background-color: rgb(18, 19, 20);
 
+  .loader {
+    height: 100%;
+    position: absolute;
+    top: calc(50vh - 4rem);
+    left: 0;
+  }
+
   .heading {
     font-size: 1rem;
     font-family: 'Quicksand', sans-serif;
@@ -191,6 +198,10 @@ $liked_width: 12rem;
     padding-right: 1rem;
     font-family: 'Quicksand', sans-serif;
     transition: all 0.3s ease;
+
+    .loader {
+      position: initial;
+    }
 
     .liked-podcast-link {
       color: white;

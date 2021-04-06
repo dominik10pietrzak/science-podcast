@@ -7,7 +7,7 @@
 
   .form-container {
     position: relative;
-    width: 100%;
+    width: inherit;
     display: flex;
     flex-direction: column;
     color: rgb(160, 164, 167);
@@ -17,6 +17,7 @@
       font-family: $second_font;
       font-weight: 500;
       font-size: 0.7rem;
+      line-height: 1.25rem;
       margin: 2rem 0;
     }
 
@@ -34,7 +35,7 @@
         background: transparent;
         outline: none;
         border: none;
-        border-bottom: solid 2px rgb(160, 164, 167);
+        border-bottom: solid 1px rgb(160, 164, 167);
         font-family: $second_font;
         font-weight: 500;
 
@@ -44,7 +45,7 @@
 
         &:hover,
         &:focus {
-          border-bottom: solid 2px white;
+          border-bottom: solid 1px white;
         }
       }
 
@@ -53,71 +54,49 @@
         resize: none;
       }
     }
-
-    button {
+    .bottom {
       width: 100%;
-      background: rgb(87, 87, 87);
-      font-family: $second_font;
-      font-weight: 500;
-      text-transform: lowercase;
+
+      button {
+        width: 100%;
+        background: rgb(117, 121, 122);
+        font-family: $second_font;
+        font-weight: 500;
+        text-transform: lowercase;
+      }
     }
   }
 }
 
-@media only screen and(max-width: 420px) {
+@media only screen and(max-width: 450px) {
   .message-form {
-    padding: 0 0.5rem;
+    width: 100%;
     padding-bottom: 1rem;
     background: transparent;
+    text-align: center;
 
     .form-container {
       padding: 2rem 0;
       padding-top: 0;
+      align-items: center;
 
-      .form-flex-container {
-        flex-direction: column;
+      .form-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
 
-        .form-group {
-          width: 100%;
-          margin: 0;
-          padding: 0 1rem;
+        input {
+          border: none;
+          border-bottom: solid 1px gray;
+        }
 
-          input {
-            border: none;
-            border-bottom: solid 1px gray;
+        textarea {
+          border: solid 1px rgb(177, 177, 177);
 
-            &:focus {
-              border: none;
-              border-bottom: solid 1px rgb(177, 177, 177);
-            }
-
-            &:hover {
-              border: none;
-              border-bottom: solid 1px rgb(177, 177, 177);
-            }
-          }
-
-          textarea {
-            border: solid 1px gray;
-
-            &:focus {
-              border: solid 1px rgb(177, 177, 177);
-            }
-          }
-
-          input,
-          textarea {
-            padding: 0.25rem;
-          }
-
-          textarea {
-            height: 6rem;
+          &:focus {
+            border: solid 1px rgb(177, 177, 177);
           }
         }
-      }
-
-      button {
-        margin: 0 1rem;
       }
     }
   }
