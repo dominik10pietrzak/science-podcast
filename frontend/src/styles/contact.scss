@@ -1,60 +1,48 @@
 @import 'utils';
 
 .contact {
-  padding: 4rem 0;
-  min-height: 100vh;
   display: flex;
   align-items: center;
-  background: rgb(18, 19, 20);
+  justify-content: center;
+  padding: 0 $page_padding_x;
+  background: $main_bg_color;
   color: white;
 
+  *:not(i) {
+    font-family: $third_font;
+  }
+
   .content {
+    padding: 5rem 0;
+    background: rgb(27, 29, 31);
     width: 100%;
+    height: 100%;
+    min-height: calc(100vh - 4rem);
     display: flex;
-    padding: 0 $page_padding_x;
-    border: solid 2px rgb(66, 66, 66);
-    border: {
-      left: 0;
-      right: 0;
-    }
+    justify-content: center;
+    align-items: center;
     transition: all 0.3s ease;
-
-    *:not(i) {
-      font-family: $third_font;
-    }
-
-    .flex-container {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: center;
-      transition: all 0.3s ease;
-
-      .heading {
-        font-weight: normal;
-        font-family: $roboto;
-        font-size: 4rem;
-        color: white;
-        margin: 0;
-      }
-    }
-
-    .line {
-      width: 1px;
-      height: 34rem;
-      background-color: rgb(66, 66, 66);
-      margin: 0 3rem;
-    }
 
     .crew {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      margin-left: 5rem;
+
+      .contact-image {
+        width: 12rem;
+      }
+
+      .heading {
+        font-family: $second_font;
+        font-size: 1.75rem;
+        margin-bottom: 3rem;
+        color: white;
+      }
 
       .person {
-        width: 17rem;
         display: flex;
-        margin: 1.5rem 0;
+        align-items: center;
+        margin-top: 2rem;
         transition: all 0.5s ease;
 
         .person-top {
@@ -63,11 +51,12 @@
         }
 
         img {
-          width: 6rem;
-          height: 6rem;
+          width: 3rem;
+          height: 3rem;
           margin-right: 1rem;
           object-fit: cover;
           opacity: 0;
+          border-radius: 10px;
         }
 
         .contact-forms {
@@ -75,20 +64,17 @@
           flex-direction: column;
 
           .name {
-            font-size: 1rem;
-            font-family: $roboto;
-            margin: {
-              top: 0.5rem;
-              bottom: 0.5rem;
-            }
+            font-size: 0.9rem;
+            font-family: $second_font;
+            margin: 0;
           }
 
           .social-media {
             a,
             i {
-              font-size: 0.8rem;
-              margin-right: 0.3rem;
-              color: gray;
+              font-size: 0.7rem;
+              margin-right: 0.2rem;
+              color: rgb(190, 194, 197);
 
               &:hover {
                 color: white;
@@ -98,16 +84,11 @@
 
           .introduction {
             font-size: 0.55rem;
-            font-family: $roboto;
-          }
-
-          i {
-            font-size: 0.6rem;
-            margin-right: 0.35rem;
+            font-family: $second_font;
+            margin: 0.5rem 0;
           }
 
           span {
-            margin-top: 0.5rem;
             font-size: 0.65rem;
           }
         }
@@ -135,8 +116,8 @@
 @each $width, $padding in $paddings {
   @media screen and (max-width: $width) {
     .contact {
+      padding: 0 $padding;
       .content {
-        padding: 0 $padding;
       }
     }
   }
@@ -145,12 +126,8 @@
 @media only screen and (max-width: 1024px) {
   .contact {
     .content {
-      border: none;
       flex-direction: column-reverse;
-
-      .line {
-        display: none;
-      }
+      align-items: center;
 
       .heading {
         font-size: 1.75rem;
@@ -163,29 +140,18 @@
         }
       }
 
-      .flex-container {
+      .crew {
+        justify-content: center;
         align-items: center;
+        margin-left: 0;
+        margin-bottom: 6rem;
+        align-items: flex-start;
 
         .heading {
           font-size: 1.75rem;
           font-weight: bold;
-          margin: {
-            bottom: 0.5rem;
-            top: 3rem;
-          }
           width: 100%;
-          text-align: center;
-
-          &:nth-of-type(2) {
-            margin-top: 1rem;
-          }
         }
-      }
-
-      .crew {
-        width: 100%;
-        justify-content: center;
-        align-items: center;
 
         .crew-wrapper {
           display: flex;
@@ -227,21 +193,28 @@
 
 @media only screen and (max-width: 450px) {
   .contact {
+    background: rgb(27, 29, 31);
     .content {
+      padding: {
+        bottom: 1rem;
+        top: 1rem;
+      }
       .heading {
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
         width: 100%;
-        text-align: center;
 
         &:nth-of-type(2) {
           margin-top: 1rem;
         }
       }
 
-      .flex-container {
+      .crew {
+        width: 100%;
+        flex-direction: column;
         align-items: center;
+        margin-bottom: 1.5rem;
 
         .heading {
           font-size: 1.5rem;
@@ -254,11 +227,12 @@
             margin-top: 1rem;
           }
         }
-      }
 
-      .crew {
-        width: 100%;
-        flex-direction: column;
+        .contact-image {
+          width: 7rem;
+          margin-bottom: 3rem;
+          display: none;
+        }
 
         .person {
           width: 100%;
@@ -272,9 +246,11 @@
 
           .person-top {
             img {
-              width: 5rem;
-              height: 5rem;
+              width: 100%;
+              height: 100%;
               margin: 0;
+              margin-bottom: 1rem;
+              border-radius: 0;
             }
           }
 

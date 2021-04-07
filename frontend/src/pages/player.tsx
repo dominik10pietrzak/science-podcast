@@ -147,7 +147,7 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
       preview.style.backgroundColor = `rgba${podcastPreview.dominant_color.slice(
         0,
         -1
-      )}, .5)`;
+      )}, .75)`;
     }
 
     setTimeout(() => {

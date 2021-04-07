@@ -77,7 +77,7 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
                 </div>
                 <div className='newest-podcast-data'>
                   <h1>{podcasts[0].title}</h1>
-                  <p>{podcasts[0].description}</p>
+                  <p className='description'>{podcasts[0].description}</p>
                   <Link
                     className='basic-button'
                     to={`/podcast/${podcasts[0].id}`}>

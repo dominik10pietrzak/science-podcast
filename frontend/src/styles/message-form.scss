@@ -3,7 +3,7 @@
 .message-form {
   display: flex;
   flex-direction: column;
-  width: 15rem;
+  width: 17rem;
 
   .form-container {
     position: relative;
@@ -12,57 +12,66 @@
     flex-direction: column;
     color: rgb(160, 164, 167);
 
-    p {
+    .heading {
+      font-family: $second_font;
+      font-size: 1.75rem;
+      margin: 0;
       color: white;
+    }
+
+    p {
+      max-width: 100%;
+      font-size: 0.6rem;
+      font-weight: 500;
+      font-family: $second_font;
+      line-height: 1.15rem;
+      color: rgb(190, 194, 197);
+      margin-bottom: 2rem;
+    }
+
+    label {
+      font-size: 0.65rem;
+      margin-bottom: 0.35rem;
+      font-family: $roboto;
+      color: white;
+    }
+
+    input,
+    textarea {
+      font-size: 0.55rem;
+      padding: 0.65rem 0.75rem;
+      margin-bottom: 1.25rem;
+      color: white;
+      background: $main_bg_color;
+      border-radius: 10px;
+      outline: none;
+      border: none;
       font-family: $second_font;
       font-weight: 500;
-      font-size: 0.7rem;
-      line-height: 1.25rem;
-      margin: 2rem 0;
-    }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      input,
-      textarea {
-        font-size: 0.7rem;
-        padding: 0.5rem 0;
-        margin-bottom: 1.5rem;
-        color: white;
-        background: transparent;
-        outline: none;
-        border: none;
-        border-bottom: solid 1px rgb(160, 164, 167);
-        font-family: $second_font;
-        font-weight: 500;
-
-        &::placeholder {
-          color: rgb(160, 164, 167);
-        }
-
-        &:hover,
-        &:focus {
-          border-bottom: solid 1px white;
-        }
+      &::placeholder {
+        color: rgb(190, 194, 197);
       }
 
-      textarea {
-        height: 4rem;
-        resize: none;
+      &:hover {
+        background: lighten($color: $main_bg_color, $amount: 1);
       }
     }
-    .bottom {
-      width: 100%;
 
-      button {
-        width: 100%;
-        background: rgb(117, 121, 122);
-        font-family: $second_font;
-        font-weight: 500;
-        text-transform: lowercase;
+    textarea {
+      height: 4rem;
+      resize: none;
+    }
+
+    button {
+      border-radius: 10px;
+      background-color: rgba($main_cyan, 1);
+      padding: 0.4rem 1rem;
+      text-transform: lowercase;
+      font-family: $second_font;
+
+      &:hover {
+        background-color: rgba($main_cyan, 0.5);
       }
     }
   }
@@ -72,31 +81,16 @@
   .message-form {
     width: 100%;
     padding-bottom: 1rem;
+    margin-top: 0.5rem;
     background: transparent;
-    text-align: center;
 
     .form-container {
       padding: 2rem 0;
       padding-top: 0;
-      align-items: center;
 
-      .form-group {
+      input,
+      textarea {
         width: 100%;
-        margin: 0;
-        padding: 0;
-
-        input {
-          border: none;
-          border-bottom: solid 1px gray;
-        }
-
-        textarea {
-          border: solid 1px rgb(177, 177, 177);
-
-          &:focus {
-            border: solid 1px rgb(177, 177, 177);
-          }
-        }
       }
     }
   }
