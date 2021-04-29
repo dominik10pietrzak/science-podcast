@@ -13,7 +13,6 @@ import { activatePastePermission } from '../functions/commentFunctions';
 const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
   const [commentText, setCommentText] = useState('');
   const [commentToDelete, setCommentToDelete] = useState(0);
-  const [confirm, setConfirm] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -145,37 +144,6 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     }
   };
 
-  const buttonsToggle = (commentId: number) => {
-    const editButtons = document.querySelector(
-      `#comment-${commentId} .comment-user-functions .edit-buttons`
-    ) as HTMLElement;
-    const onwerButtons = document.querySelector(
-      `#comment-${commentId} .comment-user-functions .owner-buttons`
-    ) as HTMLElement;
-    const commentValue = document.getElementById(
-      `comment-input-${commentId}`
-    ) as HTMLInputElement;
-
-    editButtons.classList.toggle('buttons-disabled');
-    onwerButtons.classList.toggle('buttons-disabled');
-    commentValue.classList.toggle('editable');
-  };
-
-  const startStopEditingComment = async (commentId: number) => {
-    buttonsToggle(commentId);
-
-    const commentValue = document.getElementById(
-      `comment-input-${commentId}`
-    ) as HTMLInputElement;
-
-    if (commentValue.contentEditable === 'true') {
-      commentValue.contentEditable = 'false';
-      await dispatch(getComments(podcastId, false));
-    } else {
-      commentValue.contentEditable = 'true';
-    }
-  };
-
   const editCommentText = (
     content: any,
     commentId: number,
@@ -197,44 +165,16 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
     });
   };
 
-  const submitEditComment = async (commentId: number) => {
-    const comment = document.getElementById(
-      `comment-input-${commentId}`
-    ) as HTMLElement;
-    const commentText = document.querySelector(
-      `#comment-input-${commentId} .comment-text`
-    ) as HTMLElement;
-
-    try {
-      const config = {
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      };
-
-      await axios.put(
-        `/api/podcast/comments/${commentId}/update/`,
-        { text: commentText.innerText },
-        config
-      );
-      buttonsToggle(commentId);
-      comment.contentEditable = 'false';
-      await dispatch(getComments(podcastId, false));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const commentsNumber = comments?.reduce((sum: number, comment: any) => {
+    console.log(comment);
+    return sum + 1 + comment.replies.length;
+  }, 0);
 
   return comments ? (
     <div className='comments'>
       {activatePastePermission()}
       <Confirm commentToDelete={commentToDelete} />
-      {comments && comments.length === 0 ? (
-        <h3 className='section-title'>Nie ma jeszcze żadnych komentarzy</h3>
-      ) : (
-        <h3 className='section-title'>Komentarze</h3>
-      )}
+      <h3 className='section-title'>{commentsNumber} Komentarz</h3>
       <form
         className='comment-form'
         onSubmit={(e) => createCommentHandler(e, 'podcast')}>
@@ -273,14 +213,13 @@ const Comments: React.FC<{ podcastId: number }> = ({ podcastId }) => {
             key={comment.id}
             comment={comment}
             userInfo={userInfo}
-            submitEditComment={submitEditComment}
-            startStopEditingComment={startStopEditingComment}
             commentDeleteHandler={commentDeleteHandler}
             likeUnlike={likeUnlike}
             editCommentText={editCommentText}
             showCommentForm={showCommentForm}
             createCommentHandler={createCommentHandler}
             hideForm={hideForm}
+            podcastId={podcastId}
           />
         ))}
       </div>

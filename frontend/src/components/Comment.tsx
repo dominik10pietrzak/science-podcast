@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/comment.scss';
 
 import { useHistory } from 'react-router';
@@ -6,13 +6,15 @@ import Loader from './Loader';
 
 import TimeAgo from 'javascript-time-ago';
 import pl from 'javascript-time-ago/locale/pl';
+import { IComment } from '../functions/interfaces';
+import { useDispatch } from 'react-redux';
+import { getComments } from '../actions/commentActions';
+import axios from 'axios';
 
 interface Props {
-  comment: any;
+  comment: IComment;
   commentId?: number;
   userInfo: any;
-  submitEditComment: (commentId: number) => void;
-  startStopEditingComment: (commentId: number) => void;
   commentDeleteHandler: (commentId: number) => void;
   likeUnlike: (comment: any, commentId: number) => void;
   editCommentText: (content: any, commentId: number, replyId?: number) => void;
@@ -26,14 +28,13 @@ interface Props {
   ) => void;
   hideForm: (commentId: number) => void;
   isReply?: boolean;
+  podcastId: number;
 }
 
 const Comment: React.FC<Props> = ({
   comment,
   commentId,
   userInfo,
-  submitEditComment,
-  startStopEditingComment,
   commentDeleteHandler,
   likeUnlike,
   editCommentText,
@@ -41,12 +42,63 @@ const Comment: React.FC<Props> = ({
   createCommentHandler,
   hideForm,
   isReply,
+  podcastId,
 }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const commentRef = useRef<HTMLElement>(null);
+  const commentTextRef = useRef<HTMLElement>(null);
 
   TimeAgo.addLocale(pl);
   const timeAgo = new TimeAgo('pl-PL');
   timeAgo.format(new Date());
+
+  const buttonsToggle = (commentId: number) => {
+    const editButtons = document.querySelector(
+      `#comment-${commentId} .comment-user-functions .edit-buttons`
+    ) as HTMLElement;
+    const onwerButtons = document.querySelector(
+      `#comment-${commentId} .comment-user-functions .owner-buttons`
+    ) as HTMLElement;
+
+    editButtons.classList.toggle('buttons-disabled');
+    onwerButtons.classList.toggle('buttons-disabled');
+    commentRef.current!.classList.toggle('editable');
+  };
+
+  const startStopEditingComment = async (commentId: number) => {
+    buttonsToggle(commentId);
+
+    if (commentRef.current!.contentEditable === 'true') {
+      commentRef.current!.contentEditable = 'false';
+      await dispatch(getComments(podcastId, false));
+    } else {
+      commentRef.current!.contentEditable = 'true';
+    }
+  };
+
+  const submitEditComment = async (commentId: number) => {
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      await axios.put(
+        `/api/podcast/comments/${commentId}/update/`,
+        { text: commentTextRef.current?.innerText },
+        config
+      );
+
+      buttonsToggle(commentId);
+      commentRef.current!.contentEditable = 'false';
+      await dispatch(getComments(podcastId, false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -114,6 +166,7 @@ const Comment: React.FC<Props> = ({
           <span
             id={`comment-input-${comment.id}`}
             className='content comment-content-text'
+            ref={commentRef}
             onChange={(e) => {
               commentId
                 ? editCommentText(e.target, commentId, comment.id)
@@ -122,7 +175,9 @@ const Comment: React.FC<Props> = ({
             {comment.higher_author && (
               <span className='higher-author'>@{comment.higher_author}</span>
             )}
-            <span className='comment-text'>{comment.text}</span>
+            <span className='comment-text' ref={commentTextRef}>
+              {comment.text}
+            </span>
           </span>
           <p
             className='respond-button'
@@ -192,8 +247,6 @@ const Comment: React.FC<Props> = ({
               comment={reply}
               commentId={comment.id}
               userInfo={userInfo}
-              submitEditComment={submitEditComment}
-              startStopEditingComment={startStopEditingComment}
               commentDeleteHandler={commentDeleteHandler}
               likeUnlike={likeUnlike}
               editCommentText={editCommentText}
@@ -201,6 +254,7 @@ const Comment: React.FC<Props> = ({
               createCommentHandler={createCommentHandler}
               hideForm={hideForm}
               isReply={true}
+              podcastId={podcastId}
             />
           ))}
     </div>

@@ -1,15 +1,53 @@
 import axios from 'axios';
+import { RootStateOrAny } from 'react-redux';
+import { Action } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { IPodcast } from '../functions/interfaces';
 
-export const getPodcasts = (keyword = '') => async (dispatch: Function) => {
+const PODCAST_LIST_REQUEST = 'PODCAST_LIST_REQUEST';
+
+export interface GetPodcastsRequestAction
+  extends Action<typeof PODCAST_LIST_REQUEST> {}
+
+const PODCAST_LIST_SUCCESS = 'PODCAST_LIST_SUCCESS';
+
+export interface GetPodcastsSuccessAction
+  extends Action<typeof PODCAST_LIST_SUCCESS> {
+  payload: {
+    podcasts: IPodcast[];
+  };
+}
+
+const PODCAST_LIST_FAILURE = 'PODCAST_LIST_FAILURE';
+
+export interface GetPodcastsFailureAction
+  extends Action<typeof PODCAST_LIST_FAILURE> {
+  payload: {
+    error: any;
+  };
+}
+
+export const getPodcasts = (
+  keyword: string = ''
+): ThunkAction<
+  void,
+  RootStateOrAny,
+  undefined,
+  GetPodcastsRequestAction | GetPodcastsSuccessAction | GetPodcastsFailureAction
+> => async (dispatch) => {
   try {
-    dispatch({ type: 'PODCAST_LIST_REQUEST' });
+    dispatch({ type: PODCAST_LIST_REQUEST });
 
     const { data } = await axios.get(`/api/podcast/${keyword}`);
+    console.log(data.results);
 
-    dispatch({ type: 'PODCAST_LIST_SUCCESS', payload: data });
+    dispatch({
+      type: PODCAST_LIST_SUCCESS,
+      payload: { podcasts: data.results },
+    });
   } catch (error) {
     dispatch({
-      type: 'PODCAST_LIST_FAIL',
+      type: PODCAST_LIST_FAILURE,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
@@ -18,11 +56,14 @@ export const getPodcasts = (keyword = '') => async (dispatch: Function) => {
   }
 };
 
-export const getPodcastDetails = (id: number) => async (dispatch: Function) => {
+export const getPodcastDetails = (
+  id: number
+): ThunkAction<void, RootStateOrAny, undefined, Action> => async (dispatch) => {
   try {
     dispatch({ type: 'PODCAST_DETAILS_REQUEST' });
 
     const { data } = await axios.get(`/api/podcast/${id}`);
+    console.log(data);
 
     dispatch({ type: 'PODCAST_DETAILS_SUCCESS', payload: data });
   } catch (error) {
@@ -39,7 +80,10 @@ export const getPodcastDetails = (id: number) => async (dispatch: Function) => {
 export const createPodcastComment = (
   podcastId: number,
   comment: string
-) => async (dispatch: Function, getState: Function) => {
+): ThunkAction<void, RootStateOrAny, undefined, Action> => async (
+  dispatch,
+  getState
+) => {
   try {
     dispatch({
       type: 'PODCAST_CREATE_COMMENT_REQUEST',
@@ -77,10 +121,12 @@ export const createPodcastComment = (
   }
 };
 
-export const createPodcast = () => async (
-  dispatch: Function,
-  getState: Function
-) => {
+export const createPodcast = (): ThunkAction<
+  void,
+  RootStateOrAny,
+  undefined,
+  Action
+> => async (dispatch, getState) => {
   try {
     dispatch({
       type: 'PODCAST_CREATE_REQUEST',
@@ -113,9 +159,11 @@ export const createPodcast = () => async (
   }
 };
 
-export const updatePodcast = (podcast: any) => async (
-  dispatch: Function,
-  getState: Function
+export const updatePodcast = (
+  podcast: any
+): ThunkAction<void, RootStateOrAny, undefined, Action> => async (
+  dispatch,
+  getState
 ) => {
   try {
     dispatch({
@@ -154,9 +202,11 @@ export const updatePodcast = (podcast: any) => async (
   }
 };
 
-export const deletePodcast = (id: number) => async (
-  dispatch: Function,
-  getState: Function
+export const deletePodcast = (
+  id: number
+): ThunkAction<void, RootStateOrAny, undefined, Action> => async (
+  dispatch,
+  getState
 ) => {
   try {
     dispatch({

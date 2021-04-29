@@ -65,13 +65,13 @@
 
     button {
       border-radius: 10px;
-      background-color: rgba($main_cyan, 1);
+      background-color: rgba($main_purple, 1);
       padding: 0.4rem 1rem;
       text-transform: lowercase;
       font-family: $second_font;
 
       &:hover {
-        background-color: rgba($main_cyan, 0.5);
+        background-color: rgba($main_purple, 0.5);
       }
     }
   }
@@ -81,7 +81,6 @@
   .message-form {
     width: 100%;
     padding-bottom: 1rem;
-    margin-top: 0.5rem;
     background: transparent;
 
     .form-container {

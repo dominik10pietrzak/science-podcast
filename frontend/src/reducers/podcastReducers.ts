@@ -1,17 +1,34 @@
-export const podcastListReducer = (state = { podcasts: [] }, action: any) => {
+import {
+  GetPodcastsFailureAction,
+  GetPodcastsRequestAction,
+  GetPodcastsSuccessAction,
+} from '../actions/podcastActions';
+import { IPodcast } from '../functions/interfaces';
+
+interface InitialPodcastState {
+  podcasts: IPodcast[];
+}
+
+export const podcastListReducer = (
+  state: InitialPodcastState = { podcasts: [] },
+  action:
+    | GetPodcastsRequestAction
+    | GetPodcastsSuccessAction
+    | GetPodcastsFailureAction
+) => {
   switch (action.type) {
     case 'PODCAST_LIST_REQUEST':
       return { loading: true, podcasts: [] };
 
     case 'PODCAST_LIST_SUCCESS':
+      console.log(action.payload);
       return {
+        ...state,
         loading: false,
-        podcasts: action.payload.results,
-        // page: action.payload.page,
-        // pages: action.payload.pages,
+        podcasts: action.payload.podcasts,
       };
 
-    case 'PODCAST_LIST_FAIL':
+    case 'PODCAST_LIST_FAILURE':
       return { loading: false, error: action.payload };
 
     default:

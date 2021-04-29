@@ -213,7 +213,6 @@ const Player: React.FC<{ podcastId: number }> = ({ podcastId }) => {
                       src={`https://open.spotify.com/embed-podcast/episode/${podcast.code}`}
                       width='100%'
                       frameBorder='0'
-                      allowTransparency
                       allow='encrypted-media'
                       onLoad={(e) => handleSpotifyLoad(e.target)}></iframe>
                     {playerLoading && <Loader />}
