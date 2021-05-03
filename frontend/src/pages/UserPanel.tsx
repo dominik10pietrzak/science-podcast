@@ -6,6 +6,8 @@ import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import axios from 'axios';
+import cameraImage from '../assets/camera.svg';
+import LikedPodcasts from '../components/LikedPodcasts';
 
 const UserPanel: React.FC<{ history: any }> = ({ history }) => {
   const [username, setUsername] = useState('');
@@ -13,6 +15,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [surname, setSurname] = useState('');
   const [message, setMessage] = useState('');
   const [profilePic, setProfilePic] = useState('');
   const [loading, setLoading] = useState(true);
@@ -36,6 +39,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
 
   useEffect(() => {
     (document.querySelector('.navbar') as HTMLElement).classList.add('static');
+    console.log(user);
 
     if (!userInfo || !userInfo.id) {
       history.push('/login');
@@ -47,6 +51,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
         setUsername(user.username);
         setName(user.name);
         setEmail(user.email);
+        setSurname(user.surname);
         setProfilePic(user.userProfile.profile_pic);
         setLoading(false);
         fadeInAnimations();
@@ -70,6 +75,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
           id: user.id,
           username: username,
           name: name,
+          surname: surname,
           email: email,
           password: password,
         })
@@ -122,65 +128,63 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
         <Loader />
       ) : (
         <>
-          <div className='liked-podcasts'>
-            <h3 className='heading'>Polubienia:</h3>
-            {loadingPodcasts ? (
-              <Loader />
-            ) : (
-              podcasts
-                .filter((podcast: any) =>
-                  podcast.likes.find((like: any) => like.user === userInfo.id)
-                )
-                .sort((a: any, b: any) => {
-                  const idxA = a.likes.findIndex(
-                    (like: any) => like.user === userInfo.id
-                  );
-                  const idxB = b.likes.findIndex(
-                    (like: any) => like.user === userInfo.id
-                  );
-
-                  return (
-                    Date.parse(b.likes[idxB].created) -
-                    Date.parse(a.likes[idxA].created)
-                  );
-                })
-                .map((podcast: any, idx: number) => (
-                  <Link
-                    className='liked-podcast-link'
-                    key={podcast.title}
-                    to={`podcast/${podcast.id}`}>
-                    <span>{idx + 1}</span>
-                    <img src={podcast.cover} alt='cover' />
-                    <h3>{podcast.title}</h3>
-                  </Link>
-                ))
-            )}
-          </div>
           <div className='user-data'>
-            <div className='photo-settings'>
-              <div className='picture-box'>
-                {user && (
+            <div className='user-profile-data'>
+              <div className='photo-settings'>
+                <div className='picture-box'>
                   <img
                     className='profile-pic'
-                    src={user.userProfile && user.userProfile.profile_pic}
+                    src={user?.userProfile.profile_pic}
                     alt=''
                   />
-                )}
-                {uploading && (
-                  <div className='loader-box'>
-                    <Loader />
-                  </div>
-                )}
-              </div>
-              <div className='basic-data'>
-                <h1 className='username'>{user && user.username}</h1>
-                <div className='picture-form'>
-                  <button>Zmień zdjęcie</button>
+                  {uploading && (
+                    <div className='loader-box'>
+                      <Loader />
+                    </div>
+                  )}
                   <input
+                    className='profile-photo-change-button'
                     type='file'
                     placeholder='Description'
                     onChange={uploadFileHandler()}
                   />
+                  <div className='photo-placeholder'>
+                    <img src={cameraImage} alt='camera-button-placeholder' />
+                  </div>
+                  <span className='username'>{user?.username}</span>
+                </div>
+                <div className='basic-data'>
+                  <div className='stats-container'>
+                    <div className='stats-child'>
+                      <p className='stats-number'>
+                        {
+                          podcasts?.filter((podcast: any) =>
+                            podcast.likes.find(
+                              (like: any) => like.user === userInfo?.id
+                            )
+                          ).length
+                        }
+                      </p>
+                      <span>Polubione podcasty</span>
+                    </div>
+                    <div className='line'></div>
+                    <div className='stats-child'>
+                      <p className='stats-number'>
+                        {user?.writtenCommentsNumber}
+                      </p>
+                      <span>Napisane komentarze</span>
+                    </div>
+                  </div>
+                  <div className='user-info-container'>
+                    <p>
+                      <i className='far fa-user'></i>
+                      {user?.name} {user?.surname}
+                    </p>
+                    <p>
+                      <i className='fas fa-envelope-square'></i>
+                      {user.email}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,6 +201,12 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
                 type='text'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+              />
+              <label>Nazwisko</label>
+              <input
+                type='text'
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
               />
               <label>Email</label>
               <input
@@ -220,6 +230,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
               <button type='submit'>Aktualizuj</button>
             </form>
           </div>
+          <LikedPodcasts userInfo={userInfo} />
         </>
       )}
     </div>

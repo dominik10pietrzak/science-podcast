@@ -129,7 +129,7 @@ const PodcastEdit: React.FC<{ match: any; history: any }> = ({
 
           <label>Kod</label>
           <input
-            placeholder='Wprowadź opis'
+            placeholder='Wprowadź kod'
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />

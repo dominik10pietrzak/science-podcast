@@ -29,3 +29,14 @@ export interface IComment {
   likes: {}[];
   date_added: string;
 }
+
+export interface IUser {
+  id: number;
+  username: string;
+  email: string;
+  name: string;
+  isAdmin: boolean;
+  access: string;
+  refresh: string;
+  token: string;
+}

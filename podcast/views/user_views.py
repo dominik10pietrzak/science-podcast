@@ -40,7 +40,6 @@ def registerUser(request):
     data = request.data
     try:
         user = User.objects.create(
-            first_name=data['name'],
             username=data['name'],
             email=data['email'],
             password=make_password(data['password'])
@@ -87,6 +86,7 @@ def updateUserProfile(request):
 
     user.username = data['username']
     user.first_name = data['name']
+    user.last_name = data['surname']
     user.email = data['email']
 
     if data['password'] != '':
@@ -127,6 +127,7 @@ def updateUser(request, pk):
     
     user.first_name = data['name']
     user.username = data['name']
+    user.last_name = data['surname']
     user.email = data['email']
     user.is_staff = data['isAdmin']
     user.save()

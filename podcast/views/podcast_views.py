@@ -67,7 +67,7 @@ class PodcastCreateUpdate(APIView):
 
         podcast.title = data['title']
         podcast.category = data['category']
-        podcast.podcast_code = data['code']
+        podcast.code = data['code']
         podcast.description = data['description']
 
         podcast.save()

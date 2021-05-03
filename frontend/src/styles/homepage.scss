@@ -73,11 +73,11 @@
       }
 
       .podcast-title {
-        font-family: $roboto;
-        font-weight: 500;
-        width: 36rem;
+        text-transform: uppercase;
+        font-family: $third_font;
+        width: 40rem;
         max-width: 100%;
-        font-size: 4rem;
+        font-size: 3rem;
         margin: 0.5rem 0;
       }
 
@@ -86,11 +86,11 @@
           top: 0.5rem;
           bottom: 0;
         }
-        width: 22rem;
+        width: 24rem;
         max-width: 100%;
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         font-weight: 500;
-        font-family: $second_font;
+        font-family: $third_font;
         line-height: 1.15rem;
         color: white;
       }

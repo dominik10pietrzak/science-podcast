@@ -95,9 +95,8 @@ const Register: React.FC<{ location: any; history: any }> = ({ location }) => {
             placeholder='Powtórz hasło'
             required
           />
-          <button type='submit'>Utwórz konto</button>
+          <button type='submit'>{loading ? <Loader /> : 'Utwórz konto'}</button>
           {error && <Message>{error}</Message>}
-          {loading && <Loader />}
           <p className='sign-in-info'>
             Masz już konto?{' '}
             <Link to='/login' className='link-button'>

@@ -74,9 +74,8 @@ const Login: React.FC<{ location: any; history: any }> = ({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type='submit'>Zaloguj się</button>
+        <button type='submit'>{loading ? <Loader /> : 'Zaloguj się'}</button>
         {error && <Message>{error}</Message>}
-        {loading && <Loader />}
         <p className='sign-in-info'>
           Nie masz konta?{' '}
           <Link to='/register' className='link-button'>

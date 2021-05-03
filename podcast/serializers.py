@@ -12,6 +12,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
+    surname = serializers.SerializerMethodField(read_only=True)
+    # likedPodcastsNumber = serializers.SerializerMethodField(read_only=True)
+    writtenCommentsNumber = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
     userProfile = serializers.SerializerMethodField(read_only=True)
 
@@ -24,10 +27,22 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_name(self, obj):
         name = obj.first_name
-        if name == '':
-            name = obj.email
-
         return name
+
+    def get_surname(self, obj):
+        surname = obj.last_name
+        return surname
+
+    # def get_likedPodcastsNumber(self, obj):
+    #     likedPodcastsNumber = obj.podcast_set.filter(lambda obj: obj.)
+    #     print(obj.comment_set.all())
+    #     return len(likedPodcastsNumber)
+
+    def get_writtenCommentsNumber(self, obj):
+        writtenCommentsNumber = obj.comment_set.filter(author=obj.username)
+        print(obj.comment_set.all())
+        return len(writtenCommentsNumber)
+
 
     def get_userProfile(self, obj):
         userProfile = obj.userprofile
@@ -41,7 +56,7 @@ class UserSerializerWithToken(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'name', 'isAdmin', 'token']
+        fields = '__all__'
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)

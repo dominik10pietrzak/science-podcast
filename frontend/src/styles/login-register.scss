@@ -60,8 +60,10 @@
     }
 
     button {
+      position: relative;
       font-size: 0.6rem;
       padding: 0.6rem 1.15rem;
+      height: 2rem;
       width: 100%;
       border: solid 2px black;
       text-transform: uppercase;
@@ -71,6 +73,14 @@
       font-family: 'Barlow Condensed', sans-serif;
       transition: all 0.3s ease;
       cursor: pointer;
+
+      .loader {
+        position: absolute;
+        align-items: center;
+        left: 0;
+        top: 0;
+        height: 100%;
+      }
 
       &:hover {
         background-color: white;

@@ -1,8 +1,8 @@
 @import 'utils';
-$liked_width: 12rem;
 
 .user-panel {
   display: flex;
+  justify-content: center;
   position: relative;
   min-height: 100vh;
   padding: 0 $page_padding_x;
@@ -23,94 +23,168 @@ $liked_width: 12rem;
   }
 
   .user-data {
-    width: calc(100% - #{$liked_width});
-    padding: 3rem 1rem;
-    padding-bottom: 8rem;
+    padding: 3rem 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
     transition: all 0.3s ease;
-    background-color: rgb(27, 29, 31);
 
-    .photo-settings {
-      width: 20rem;
-      display: flex;
-      align-items: flex-end;
+    .user-profile-data {
+      width: 13rem;
+      background-color: rgb(27, 29, 31);
+      height: fit-content;
 
-      .picture-box {
-        position: relative;
-        margin-right: 2rem;
-        width: 6rem;
-        height: 6rem;
-
-        .profile-pic {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          background-color: rgb(30, 73, 75);
-        }
-
-        .loader-box {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          top: 0;
-          background-color: black;
-          opacity: 0.6;
-        }
-      }
-
-      .basic-data {
-        .username {
-          margin: {
-            top: 0;
-            bottom: 1rem;
-          }
-          font-size: 1.25rem;
-        }
-
-        .picture-form {
+      .photo-settings {
+        .picture-box {
           position: relative;
-          width: 6rem;
+          width: 13rem;
+          height: 13rem;
+
+          &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: linear-gradient(
+              to bottom,
+              rgba(black, 0),
+              rgba(black, 0.2),
+              rgba(black, 0.8)
+            );
+            pointer-events: none;
+          }
 
           &:hover {
-            button {
-              background: rgb(129, 182, 189);
+            .photo-placeholder {
+              opacity: 0.5;
             }
           }
 
-          button {
+          .profile-pic {
             width: 100%;
-            font-size: 0.5rem;
-            padding: 0.4rem 0.8rem;
-            display: block;
-            border: none;
-            background-color: #141414;
-            text-transform: uppercase;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.15s ease;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            background-color: rgb(30, 73, 75);
           }
 
-          input {
+          .loader-box {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: inherit;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: black;
+            opacity: 0.6;
+            z-index: 100;
+
+            .loader {
+              position: static;
+              height: fit-content;
+            }
+          }
+
+          .profile-photo-change-button {
             position: absolute;
             left: 0;
             top: 0;
             opacity: 0;
             width: 100%;
+            height: 100%;
+            border-radius: inherit;
             font-size: 0.5rem;
             padding: 0.4rem 0.8rem;
             background-color: black;
             color: white;
             cursor: pointer;
             border: none;
+          }
+
+          .photo-placeholder {
+            background-color: black;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: inherit;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+
+            img {
+              width: 2rem;
+            }
+          }
+
+          .username {
+            position: absolute;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: $second_font;
+            left: 1rem;
+            bottom: 1.5rem;
+            z-index: 10;
+          }
+        }
+      }
+
+      .basic-data {
+        .stats-container {
+          display: flex;
+          border-bottom: solid 1px rgb(66, 66, 66);
+          height: 4rem;
+          align-items: center;
+
+          .line {
+            height: 100%;
+            width: 1px;
+            background-color: rgb(66, 66, 66);
+          }
+
+          .stats-child {
+            width: 50%;
+            padding: 0 1rem;
+            font-family: $roboto;
+
+            .stats-number {
+              margin: 0;
+              font-size: 0.9rem;
+              font-weight: bold;
+            }
+
+            span {
+              font-family: $roboto;
+              font-size: 0.45rem;
+              margin: 0;
+            }
+          }
+        }
+
+        .user-info-container {
+          padding: 1rem;
+        }
+
+        span,
+        p {
+          font-size: 0.6rem;
+          font-family: $roboto;
+          margin-bottom: 1rem;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          i {
+            margin-right: 0.5rem;
           }
         }
       }
@@ -120,13 +194,16 @@ $liked_width: 12rem;
       position: relative;
       display: flex;
       flex-direction: column;
-      width: 20rem;
-      margin-top: 3rem;
+      width: 30rem;
+      padding: 3rem;
+      margin: 0 1rem;
       color: white;
+      background-color: rgb(27, 29, 31);
 
       label {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         margin: 0.25rem 0;
+        font-family: $roboto;
       }
 
       input {
@@ -187,60 +264,6 @@ $liked_width: 12rem;
       width: 100%;
       left: 0;
       background-color: rgb(20, 20, 20);
-    }
-  }
-
-  .liked-podcasts {
-    display: flex;
-    flex-direction: column;
-    width: $liked_width;
-    padding: 3rem 0;
-    padding-right: 1rem;
-    font-family: 'Quicksand', sans-serif;
-    transition: all 0.3s ease;
-
-    .loader {
-      position: initial;
-    }
-
-    .liked-podcast-link {
-      color: white;
-      text-decoration: none;
-      width: fit-content;
-      display: flex;
-      align-items: center;
-      padding: 0.55rem;
-      width: 100%;
-      border-bottom: solid 1px rgb(48, 48, 48);
-      transition: all 0.1s ease;
-
-      &:last-of-type {
-        border: none;
-      }
-
-      h3 {
-        width: 100%;
-        font-size: 0.55rem;
-        margin: 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      span {
-        font-size: 0.55rem;
-        width: 0.75rem;
-      }
-
-      img {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin: 0 0.5rem;
-      }
-
-      &:hover {
-        background-color: black;
-      }
     }
   }
 

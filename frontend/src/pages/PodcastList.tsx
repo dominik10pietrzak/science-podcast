@@ -43,12 +43,20 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
       );
   }, [dispatch, keyword]);
 
-  const fadeInList = () => {
+  const fadeInList = async () => {
     const container = document.querySelector('.podcast-list') as HTMLElement;
+    const podcastButtons = document.querySelectorAll('.podcast-button');
+
+    podcastButtons.forEach(
+      (button, idx) =>
+        ((button as HTMLElement).style.transition = `all 0.3s ease ${
+          idx * 0.03
+        }s`)
+    );
 
     setTimeout(() => {
       container.classList.remove('fade-in-animation');
-    }, 15);
+    }, 300);
   };
 
   const loadImage = (image: any) => {

@@ -79,7 +79,7 @@
         display: grid;
         justify-content: space-between;
         grid-template-columns: repeat(5, 1fr);
-        grid-gap: 1rem;
+        grid-gap: 1.1rem;
         transition: all 0.3s ease;
 
         .podcast-button {
