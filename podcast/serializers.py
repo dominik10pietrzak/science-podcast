@@ -12,7 +12,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
-    surname = serializers.SerializerMethodField(read_only=True)
     # likedPodcastsNumber = serializers.SerializerMethodField(read_only=True)
     writtenCommentsNumber = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
@@ -29,9 +28,6 @@ class UserSerializer(serializers.ModelSerializer):
         name = obj.first_name
         return name
 
-    def get_surname(self, obj):
-        surname = obj.last_name
-        return surname
 
     # def get_likedPodcastsNumber(self, obj):
     #     likedPodcastsNumber = obj.podcast_set.filter(lambda obj: obj.)
@@ -40,7 +36,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_writtenCommentsNumber(self, obj):
         writtenCommentsNumber = obj.comment_set.filter(author=obj.username)
-        print(obj.comment_set.all())
         return len(writtenCommentsNumber)
 
 

@@ -23,14 +23,15 @@
   }
 
   .user-data {
+    width: 100%;
     padding: 3rem 0;
     display: flex;
     justify-content: space-between;
     transition: all 0.3s ease;
 
     .user-profile-data {
-      width: 13rem;
       background-color: rgb(27, 29, 31);
+      width: 13rem;
       height: fit-content;
 
       .photo-settings {
@@ -160,11 +161,13 @@
               margin: 0;
               font-size: 0.9rem;
               font-weight: bold;
+              color: white;
             }
 
             span {
               font-family: $roboto;
               font-size: 0.45rem;
+              line-height: 0;
               margin: 0;
             }
           }
@@ -177,6 +180,7 @@
         span,
         p {
           font-size: 0.6rem;
+          color: rgb(218, 226, 230);
           font-family: $roboto;
           margin-bottom: 1rem;
           text-overflow: ellipsis;
@@ -194,26 +198,39 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      width: 30rem;
+      width: calc(100% - 15rem);
       padding: 3rem;
       margin: 0 1rem;
       color: white;
       background-color: rgb(27, 29, 31);
 
+      .form-group {
+        display: flex;
+        justify-content: space-between;
+
+        .form-input {
+          display: flex;
+          flex-direction: column;
+          width: 47%;
+        }
+      }
+
       label {
-        font-size: 0.6rem;
-        margin: 0.25rem 0;
+        font-size: 0.5rem;
         font-family: $roboto;
+        margin-top: 1rem;
+        color: rgb(167, 167, 167);
       }
 
       input {
         margin-bottom: 0.6rem;
         font-size: 0.6rem;
-        padding: 0.6rem 1.15rem;
-        background-color: #141414;
+        padding: 0.35rem 0;
+        background-color: transparent;
         color: white;
         border: none;
-        border: solid 2px transparent;
+        outline: none;
+        border-bottom: solid 2px transparentize($color: white, $amount: 0.8);
 
         &[type='file'] {
           position: absolute;
@@ -223,13 +240,19 @@
           opacity: 0;
         }
 
-        &:hover {
-          border: solid 2px rgb(94, 94, 94);
+        &:focus {
+          border-bottom: solid 2px rgb(94, 94, 94);
         }
       }
 
       .heading {
-        margin: 1rem 0;
+        font-size: 0.9rem;
+        font-family: $third_font;
+        font-weight: 500;
+
+        &:not(:first-of-type) {
+          margin-top: 2rem;
+        }
       }
 
       input[type='file'] {
@@ -242,9 +265,9 @@
       button {
         font-size: 0.6rem;
         padding: 0.6rem 1.15rem;
+        margin-top: 1rem;
         width: 100%;
         border: solid 2px black;
-        text-transform: uppercase;
         font-weight: bold;
         background: black;
         color: white;
@@ -253,11 +276,11 @@
         cursor: pointer;
 
         &:hover {
-          background-color: white;
-          color: black;
+          background-color: rgb(56, 56, 56);
         }
       }
     }
+
     .footer {
       position: absolute;
       bottom: 0;
@@ -282,6 +305,21 @@
   @media screen and (max-width: $width) {
     .user-panel {
       padding: 0 $padding;
+    }
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .user-panel {
+    .user-data {
+      display: grid;
+      grid-template-columns: 13rem calc(100% - 13rem);
+
+      .data-form {
+        width: 100%;
+        grid-column: 2;
+        grid-row: 1/3;
+      }
     }
   }
 }

@@ -51,7 +51,7 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
         setUsername(user.username);
         setName(user.name);
         setEmail(user.email);
-        setSurname(user.surname);
+        setSurname(user.last_name);
         setProfilePic(user.userProfile.profile_pic);
         setLoading(false);
         fadeInAnimations();
@@ -81,6 +81,8 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
         })
       );
       setMessage('');
+      setPassword('');
+      setConfirmPassword('');
     }
   };
 
@@ -127,111 +129,115 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <div className='user-data'>
-            <div className='user-profile-data'>
-              <div className='photo-settings'>
-                <div className='picture-box'>
-                  <img
-                    className='profile-pic'
-                    src={user?.userProfile.profile_pic}
-                    alt=''
-                  />
-                  {uploading && (
-                    <div className='loader-box'>
-                      <Loader />
-                    </div>
-                  )}
-                  <input
-                    className='profile-photo-change-button'
-                    type='file'
-                    placeholder='Description'
-                    onChange={uploadFileHandler()}
-                  />
-                  <div className='photo-placeholder'>
-                    <img src={cameraImage} alt='camera-button-placeholder' />
+        <div className='user-data'>
+          <div className='user-profile-data'>
+            <div className='photo-settings'>
+              <div className='picture-box'>
+                <img
+                  className='profile-pic'
+                  src={user?.userProfile.profile_pic}
+                  alt=''
+                />
+                {uploading && (
+                  <div className='loader-box'>
+                    <Loader />
                   </div>
-                  <span className='username'>{user?.username}</span>
+                )}
+                <input
+                  className='profile-photo-change-button'
+                  type='file'
+                  placeholder='Description'
+                  onChange={uploadFileHandler()}
+                />
+                <div className='photo-placeholder'>
+                  <img src={cameraImage} alt='camera-button-placeholder' />
                 </div>
-                <div className='basic-data'>
-                  <div className='stats-container'>
-                    <div className='stats-child'>
-                      <p className='stats-number'>
-                        {
-                          podcasts?.filter((podcast: any) =>
+                <span className='username'>{user?.username}</span>
+              </div>
+              <div className='basic-data'>
+                <div className='stats-container'>
+                  <div className='stats-child'>
+                    <p className='stats-number'>
+                      {podcasts
+                        ? podcasts.filter((podcast: any) =>
                             podcast.likes.find(
                               (like: any) => like.user === userInfo?.id
                             )
                           ).length
-                        }
-                      </p>
-                      <span>Polubione podcasty</span>
-                    </div>
-                    <div className='line'></div>
-                    <div className='stats-child'>
-                      <p className='stats-number'>
-                        {user?.writtenCommentsNumber}
-                      </p>
-                      <span>Napisane komentarze</span>
-                    </div>
-                  </div>
-                  <div className='user-info-container'>
-                    <p>
-                      <i className='far fa-user'></i>
-                      {user?.name} {user?.surname}
+                        : 0}
                     </p>
-                    <p>
-                      <i className='fas fa-envelope-square'></i>
-                      {user.email}
-                    </p>
+                    <span>Polubione podcasty</span>
                   </div>
+                  <div className='line'></div>
+                  <div className='stats-child'>
+                    <p className='stats-number'>
+                      {user?.writtenCommentsNumber}
+                    </p>
+                    <span>Napisane komentarze</span>
+                  </div>
+                </div>
+                <div className='user-info-container'>
+                  <p>
+                    <i className='far fa-user'></i>
+                    {user?.first_name} {user?.last_name}
+                  </p>
+                  <p>
+                    <i className='fas fa-envelope-square'></i>
+                    {user.email}
+                  </p>
                 </div>
               </div>
             </div>
-            <form className='data-form' onSubmit={submitHandler}>
-              <h3 className='heading'>Edytuj informacje</h3>
-              <label>Nazwa użytkownika</label>
-              <input
-                type='text'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <label>Imię</label>
-              <input
-                type='text'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label>Nazwisko</label>
-              <input
-                type='text'
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
-              />
-              <label>Email</label>
-              <input
-                type='text'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <h3 className='heading'>Zmień hasło</h3>
-              <label>Hasło</label>
-              <input
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <label>Potwierdź hasło</label>
-              <input
-                type='password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <button type='submit'>Aktualizuj</button>
-            </form>
           </div>
+          <form className='data-form' onSubmit={submitHandler}>
+            <h3 className='heading'>Edytuj informacje</h3>
+            <label>Nazwa użytkownika</label>
+            <input
+              type='text'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <div className='form-group'>
+              <div className='form-input'>
+                <label>Imię</label>
+                <input
+                  type='text'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className='form-input'>
+                <label>Nazwisko</label>
+                <input
+                  type='text'
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
+                />
+              </div>
+            </div>
+            <label>Email</label>
+            <input
+              type='text'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <h3 className='heading'>Zmień hasło</h3>
+            <label>Hasło</label>
+            <input
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label>Potwierdź hasło</label>
+            <input
+              type='password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <button type='submit'>Zapisz</button>
+          </form>
           <LikedPodcasts userInfo={userInfo} />
-        </>
+        </div>
       )}
     </div>
   );

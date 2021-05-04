@@ -100,24 +100,18 @@ const Landing: React.FC = () => {
           alt='sky'
           onLoad={loadImage}
         />
-        {podcast && podcast.title ? (
-          <div className='text-content hidden'>
-            {/* <h1 className='podcast-title'>{podcast && podcast.title}</h1> */}
-            <h1 className='podcast-title'>Podcast popularno naukowy</h1>
-            <p className='description'>
-              Prowadzącym podcastu jest Łukasz Zduńczyk, dziennikarz Radia
-              Kampus. Już teraz słuchaj podcastów o tematyce takiej jak kosmos,
-              klimat czy technologia.
-            </p>
-            <Link to={`/podcast`} className='basic-button' id='podcast-button'>
-              Przejdź
-            </Link>
-          </div>
-        ) : loading ? (
-          <Loader />
-        ) : (
-          ''
-        )}
+        <div className='text-content hidden'>
+          {/* <h1 className='podcast-title'>{podcast && podcast.title}</h1> */}
+          <h1 className='podcast-title'>Podcast popularno naukowy</h1>
+          <p className='description'>
+            Prowadzącym podcastu jest Łukasz Zduńczyk, dziennikarz Radia Kampus.
+            Już teraz słuchaj podcastów o tematyce takiej jak kosmos, klimat czy
+            technologia.
+          </p>
+          <Link to={`/podcast`} className='basic-button' id='podcast-button'>
+            Przejdź
+          </Link>
+        </div>
       </div>
       {/* <div className='section-preview about'></div> */}
     </div>

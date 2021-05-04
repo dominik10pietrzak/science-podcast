@@ -47,9 +47,9 @@ class Podcast(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    podcast = models.ForeignKey(Podcast, on_delete=models.SET_NULL, null=True, blank=True)
-    higher_comment = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, null=True, blank=True)
+    higher_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     author = models.CharField(max_length=200, null=True, blank=True)
     was_edited = models.BooleanField(default=False)
     higher_author = models.CharField(max_length=200, null=True, blank=True)
@@ -64,9 +64,9 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    podcast = models.ForeignKey(Podcast, on_delete=models.SET_NULL, null=True, blank=True)
-    comment = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    podcast = models.ForeignKey(Podcast, on_delete=models.CASCADE, null=True, blank=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
 

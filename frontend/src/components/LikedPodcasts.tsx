@@ -14,11 +14,11 @@ const LikedPodcasts: React.FC<Props> = ({ userInfo }) => {
   const { podcasts, loading: loadingPodcasts } = podcastList;
 
   return (
-    <div className='liked-podcasts'>
-      <h3 className='heading'>Polubienia:</h3>
+    <div className={`liked-podcasts ${loadingPodcasts && 'hidden'}`}>
+      <h3 className='heading'>Polubione podcasty</h3>
       {loadingPodcasts ? (
         <Loader />
-      ) : (
+      ) : podcasts ? (
         podcasts
           .filter((podcast: any) =>
             podcast.likes.find((like: any) => like.user === userInfo?.id)
@@ -48,6 +48,8 @@ const LikedPodcasts: React.FC<Props> = ({ userInfo }) => {
               <h3>{podcast.title}</h3>
             </Link>
           ))
+      ) : (
+        <span className='no-likes'>Brak polubień</span>
       )}
     </div>
   );

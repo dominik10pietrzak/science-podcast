@@ -4,13 +4,29 @@
   display: flex;
   flex-direction: column;
   width: $liked_width;
-  padding: 3rem 0;
-  padding-right: 1rem;
+  padding: 3rem 0 1rem 0;
   font-family: 'Quicksand', sans-serif;
   transition: all 0.3s ease;
+  background-color: rgb(27, 29, 31);
+  height: fit-content;
+  width: 13rem;
+
+  &.hidden {
+    background: transparent;
+  }
 
   .loader {
     position: initial;
+  }
+
+  .heading {
+    font-size: 0.9rem;
+    font-family: $third_font;
+    font-weight: 500;
+    margin: 1rem;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px transparentize($color: white, $amount: 0.8);
   }
 
   .liked-podcast-link {
@@ -19,7 +35,7 @@
     width: fit-content;
     display: flex;
     align-items: center;
-    padding: 0.55rem;
+    padding: 0.55rem 1rem;
     width: 100%;
     border-bottom: solid 1px rgb(48, 48, 48);
     transition: all 0.1s ease;
@@ -52,5 +68,18 @@
     &:hover {
       background-color: black;
     }
+  }
+  .no-likes {
+    padding: 1rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .liked-podcasts {
+    height: 18rem;
+    overflow: auto;
+    padding-top: 1rem;
+    margin-top: 1rem;
   }
 }
