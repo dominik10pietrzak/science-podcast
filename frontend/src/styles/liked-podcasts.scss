@@ -3,7 +3,6 @@
 .liked-podcasts {
   display: flex;
   flex-direction: column;
-  width: $liked_width;
   padding: 3rem 0 1rem 0;
   font-family: 'Quicksand', sans-serif;
   transition: all 0.3s ease;
@@ -13,6 +12,10 @@
 
   &.hidden {
     background: transparent;
+
+    .heading {
+      opacity: 0;
+    }
   }
 
   .loader {
@@ -24,9 +27,11 @@
     font-family: $third_font;
     font-weight: 500;
     margin: 1rem;
+    width: 11rem;
     margin-top: 0;
     padding-bottom: 1rem;
     border-bottom: solid 1px transparentize($color: white, $amount: 0.8);
+    transition: all 0.1s ease;
   }
 
   .liked-podcast-link {
@@ -72,6 +77,7 @@
   .no-likes {
     padding: 1rem;
     font-size: 0.7rem;
+    width: 100%;
   }
 }
 

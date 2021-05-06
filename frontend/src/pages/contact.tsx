@@ -40,11 +40,6 @@ const Contact = () => {
           ) : (
             ''
           )}
-          <img
-            className='contact-image'
-            src={contactImage}
-            alt='contactImage'
-          />
           <div className='dominik person'>
             <div className='person-top'>
               <img src={dominik} alt='dominik' />
@@ -52,6 +47,8 @@ const Contact = () => {
             <div className='contact-forms'>
               <h1 className='name'>Dominik Pietrzak</h1>
               <p className='introduction'>Web Developer, twórca aplikacji.</p>
+              <span className='basic-contact'>d.pietrzak516@op.pl</span>
+              <span className='basic-contact'>662 792 664</span>
               <span className='social-media'>
                 <a href='https://www.linkedin.com/in/dominik-pietrzak-0223bb197/'>
                   <i className='fab fa-linkedin-in' />
@@ -75,6 +72,8 @@ const Contact = () => {
             <div className='contact-forms'>
               <h1 className='name'>Łukasz Zduńczyk</h1>
               <p className='introduction'>Dziennikarz, prowadzący podcastu.</p>
+              <span className='basic-contact'>d.pietrzak516@op.pl</span>
+              <span className='basic-contact'>662 792 664</span>
               <span className='social-media'>
                 <a href='https://www.facebook.com/dominik.pietrzak.10/'>
                   <i className='fab fa-facebook-square' />

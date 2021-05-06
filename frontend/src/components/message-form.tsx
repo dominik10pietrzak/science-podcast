@@ -4,6 +4,7 @@ import '../styles/message-form.scss';
 
 const MessageForm: React.FC = () => {
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
@@ -55,6 +56,7 @@ const MessageForm: React.FC = () => {
         '/api/users/send_message/',
         {
           name,
+          surname,
           email,
           subject,
           message,
@@ -79,21 +81,33 @@ const MessageForm: React.FC = () => {
           Interesuje Cię współpraca z nami? Wypełnij formularz i wyślij
           wiadomość, dotrze ona do nas obu.
         </p>
-        <label>Imię</label>
-        <input
-          className='text-field'
-          type='text'
-          value={name}
-          placeholder='imię i nazwisko'
-          onChange={(e) => setName(e.target.value)}
-          autoComplete='off'
-        />
+        <div className='form-group'>
+          <div>
+            <label>Imię</label>
+            <input
+              className='text-field'
+              type='text'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete='off'
+            />
+          </div>
+          <div>
+            <label>Nazwisko</label>
+            <input
+              className='text-field'
+              type='text'
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+              autoComplete='off'
+            />
+          </div>
+        </div>
         <label>Email</label>
         <input
           className='text-field'
           type='email'
           value={email}
-          placeholder='adres email'
           onChange={(e) => setEmail(e.target.value)}
           autoComplete='off'
         />
@@ -102,15 +116,10 @@ const MessageForm: React.FC = () => {
         <textarea
           className='text-field'
           value={message}
-          placeholder='wiadomość'
           onChange={(e) => setMessage(e.target.value)}
           autoComplete='off'
         />
-        <div className='bottom'>
-          <button className='basic-button' type='submit'>
-            Wyślij
-          </button>
-        </div>
+        <button type='submit'>Wyślij</button>
       </form>
     </div>
   );

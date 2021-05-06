@@ -34,6 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
     #     print(obj.comment_set.all())
     #     return len(likedPodcastsNumber)
 
+
     def get_writtenCommentsNumber(self, obj):
         writtenCommentsNumber = obj.comment_set.filter(author=obj.username)
         return len(writtenCommentsNumber)

@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: calc(100vh - 4rem);
   padding: 0 $page_padding_x;
   background: $main_bg_color;
   color: white;
@@ -13,23 +14,19 @@
   }
 
   .content {
-    padding: 5rem 0;
-    background: rgb(27, 29, 31);
     width: 100%;
-    height: 100%;
-    min-height: calc(100vh - 4rem);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: flex-end;
     align-items: center;
     transition: all 0.3s ease;
 
     .crew {
       display: flex;
       flex-direction: column;
-      margin-left: 5rem;
 
       .contact-image {
-        width: 12rem;
+        width: 10rem;
       }
 
       .heading {
@@ -42,8 +39,11 @@
       .person {
         display: flex;
         align-items: center;
-        margin-top: 2rem;
         transition: all 0.5s ease;
+
+        &:not(:first-of-type) {
+          margin-top: 2rem;
+        }
 
         .person-top {
           display: flex;
@@ -51,12 +51,11 @@
         }
 
         img {
-          width: 3rem;
-          height: 3rem;
+          width: 4rem;
+          height: 4rem;
           margin-right: 1rem;
           object-fit: cover;
           opacity: 0;
-          border-radius: 10px;
         }
 
         .contact-forms {
@@ -65,15 +64,24 @@
 
           .name {
             font-size: 0.9rem;
-            font-family: $second_font;
+            font-family: $roboto;
             margin: 0;
+            color: rgb(83, 83, 83);
+          }
+
+          .basic-contact {
+            margin: 0.1rem 0;
+            font-size: 0.6rem;
+            font-family: $roboto;
+            color: rgb(194, 194, 194);
           }
 
           .social-media {
+            margin-top: 0.5rem;
             a,
             i {
               font-size: 0.7rem;
-              margin-right: 0.2rem;
+              margin-right: 0.3rem;
               color: rgb(190, 194, 197);
 
               &:hover {
