@@ -35,6 +35,7 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
     (document.querySelector('.navbar') as HTMLElement).classList.add('static');
     if (podcasts.length === 0) {
       dispatch(getPodcasts(keyword));
+      window.scrollTo({ top: 0 });
     }
 
     return () =>

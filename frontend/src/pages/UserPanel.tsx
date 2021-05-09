@@ -65,6 +65,10 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
     };
   }, [dispatch, history, success, userInfo, user]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -124,6 +128,12 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
     }
   };
 
+  const loadImage = (image: any) => {
+    setTimeout(() => {
+      (image as HTMLElement).style.opacity = '1';
+    }, 25);
+  };
+
   return (
     <div className='user-panel hidden'>
       {loading ? (
@@ -136,7 +146,8 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
                 <img
                   className='profile-pic'
                   src={user?.userProfile.profile_pic}
-                  alt=''
+                  alt='profile-pic'
+                  onLoad={(e) => loadImage(e.target)}
                 />
                 {uploading && (
                   <div className='loader-box'>

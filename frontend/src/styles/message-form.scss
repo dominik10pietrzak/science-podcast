@@ -1,97 +1,144 @@
 @import 'utils';
 
 .message-form {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  padding: 0 $page_padding_x;
+  justify-content: center;
+  width: 100%;
+  background-color: white;
 
-  .form-container {
-    position: relative;
-    width: inherit;
+  .button-wrapper {
+    height: 8rem;
     display: flex;
-    flex-direction: column;
-    color: rgb(160, 164, 167);
+    align-items: flex-start;
 
-    .form-group {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      div {
-        display: flex;
-        flex-direction: column;
-        width: 47%;
-      }
-    }
-
-    .heading {
-      font-family: $roboto;
-      font-weight: 500;
-      font-size: 1.75rem;
-      margin: 0;
-      color: white;
-    }
-
-    p {
-      max-width: 100%;
-      font-size: 0.6rem;
-      font-weight: 500;
-      font-family: $second_font;
-      line-height: 1.15rem;
-      color: rgb(194, 198, 199);
-      margin-bottom: 2rem;
-    }
-
-    label {
-      font-size: 0.65rem;
-      margin-bottom: 0.35rem;
-      font-family: $roboto;
-      color: white;
-    }
-
-    input,
-    textarea {
-      font-size: 0.55rem;
-      padding: 0.35rem 0;
-      margin-bottom: 1.25rem;
-      color: white;
-      background: transparent;
-      outline: none;
-      border: none;
-      border-bottom: solid 2px transparentize($color: white, $amount: 0.8);
-      font-family: $second_font;
-      font-weight: 500;
-
-      &::placeholder {
-        color: rgb(190, 194, 197);
-      }
-
-      &:hover {
-        border-bottom: solid 2px transparentize($color: white, $amount: 0.8);
-      }
-    }
-
-    textarea {
-      height: 4rem;
-      resize: none;
-    }
-
-    button {
-      font-size: 0.6rem;
-      padding: 0.6rem 1.75rem;
-      margin-top: 1rem;
-      align-self: flex-end;
-      font-weight: bold;
-      border: none;
-      background: black;
-      color: white;
-      font-family: $main_font;
-      transition: all 0.3s ease;
+    .podcast-button {
+      position: relative;
+      color: black;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       cursor: pointer;
-      background-color: rgba($main_purple, 0.5);
+      font-weight: 600;
+      font-family: $font_poppins;
+      font-size: 0.55rem;
+      border-bottom: solid 2px rgba(black, 0.5);
+      padding-bottom: 0.3rem;
+      width: fit-content;
+      transition: all 0.3s ease;
 
       &:hover {
-        background-color: rgba($main_purple, 1);
+        padding-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+
+    .heading-box {
+      width: 20rem;
+
+      .heading {
+        font-family: $font_poppins;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 2rem;
+        margin: {
+          top: 0;
+          bottom: 1.5rem;
+        }
+        color: black;
+      }
+
+      p {
+        font-size: 0.6rem;
+        font-family: $font_poppins;
+        font-weight: 500;
+        line-height: 1.15rem;
+        color: rgb(85, 85, 85);
+        margin-bottom: 3rem;
+        width: 14rem;
+      }
+    }
+
+    .form-container {
+      position: relative;
+      width: 26rem;
+      display: flex;
+      flex-direction: column;
+      color: black;
+
+      .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          width: 47%;
+        }
+      }
+
+      label {
+        font-size: 0.55rem;
+        font-weight: 600;
+        font-family: $font_poppins;
+        color: rgb(85, 85, 85);
+      }
+
+      input,
+      textarea {
+        font-size: 0.6rem;
+        padding: 0.35rem 0;
+        margin-bottom: 1.5rem;
+        background: transparent;
+        outline: none;
+        border: none;
+        border-bottom: solid 1px transparentize($color: black, $amount: 0.7);
+        font-family: $font_poppins;
+        font-weight: 500;
+        color: black;
+
+        &::placeholder {
+          color: rgb(190, 194, 197);
+        }
+
+        &:hover,
+        &:focus {
+          border-bottom: solid 1px transparentize($color: black, $amount: 0.2);
+        }
+      }
+
+      textarea {
+        height: 5rem;
+        resize: vertical;
+      }
+
+      button {
+        font-size: 0.5rem;
+        padding: 0.55rem 1rem;
+        margin-top: 0.5rem;
+        align-self: flex-end;
+        border: none;
+        font-weight: 500;
+        background: black;
+        color: white;
+        font-family: $font_poppins;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background-color: black;
+
+        &:hover {
+          background-color: $main_purple;
+        }
+
+        i {
+          margin-left: 0.5rem;
+        }
       }
     }
   }

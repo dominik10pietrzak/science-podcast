@@ -20,7 +20,8 @@
     margin: 0;
     margin-bottom: 1rem;
     font-size: 1rem;
-    font-family: $second_font;
+    font-weight: 500;
+    font-family: $font_poppins;
     transition: all 0.3s ease 0.3s;
   }
 
@@ -29,7 +30,7 @@
     flex-direction: column;
     width: calc(100% - #{$settings_width});
     padding: 4rem 2rem;
-    background-color: rgb(27, 29, 31);
+    background: rgb(27, 29, 31);
     transition: all 0.15s ease;
 
     .newest-podcast {
@@ -56,8 +57,8 @@
 
         h1 {
           margin: 0;
-          font-family: $roboto;
-          font-size: 1.5rem;
+          font-family: $font_poppins;
+          font-size: 1.45rem;
         }
 
         .description {
@@ -88,11 +89,11 @@
           transition: all 0.5s ease 0.1s;
 
           .podcast-title {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 500;
             max-width: 100%;
             margin: 0.25rem 0;
-            font-family: 'Quicksand', sans-serif;
+            font-family: $font_poppins;
             overflow: hidden;
             white-space: normal;
             text-overflow: ellipsis;
@@ -176,23 +177,27 @@
       opacity: 0;
     }
 
-    .newest-podcast {
-      .newest-podcast-data {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-    }
-
-    .newest-list {
+    .main {
       opacity: 0;
 
-      .heading {
-        opacity: 0;
+      .newest-podcast {
+        .newest-podcast-data {
+          opacity: 0;
+          transform: translateY(15px);
+        }
       }
 
-      .podcast-button {
+      .newest-list {
         opacity: 0;
-        transform: translateY(15px);
+
+        .heading {
+          opacity: 0;
+        }
+
+        .podcast-button {
+          opacity: 0;
+          transform: translateY(15px);
+        }
       }
     }
   }

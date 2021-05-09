@@ -150,14 +150,14 @@ def deleteUser(request, pk):
 def send_email_message(request):
     data = request.data
 
-    message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] 
+    message_title = 'Wiadomość ze strony portfolio od - ' + data['name'] + data['surname']
     message =  data['message'] + ' ' + data['email']
 
     send_mail(
         message_title,
         message,
         settings.EMAIL_HOST_USER,
-        ['dominikpietrzak.webdev@gmail.com'],
+        ['dominikpietrzak.webdev@gmail.com', 'zdunczyklukasz01@gmail.com'],
         fail_silently=False,
     )
 

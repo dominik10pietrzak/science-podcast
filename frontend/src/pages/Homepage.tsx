@@ -2,65 +2,16 @@ import React, { useEffect, useState } from 'react';
 import '../styles/homepage.scss';
 
 import background from '../assets/background-landing.jpg';
-import backgroundWeather from '../assets/background-weather-preview.jpg';
 
 import { Link } from 'react-router-dom';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { getPodcastDetails } from '../actions/podcastActions';
-import Loader from '../components/Loader';
-
-import { translateDescription } from '../functions/functions';
-
-import axios from 'axios';
 
 const Landing: React.FC = () => {
-  const dispatch = useDispatch();
-  const [temp, setTemp] = useState(0);
-  const [desc, setDesc] = useState('');
-  const [weatherLoading, setWeatherLoading] = useState(false);
-  const [podcast, setPodcast] = useState({} as any);
-  const [loading, setLoading] = useState(true);
-
-  const getWeather = async () => {
-    const APIKey = 'e7eec20a0655f51584d3e1a50afa74ca';
-    const API = `https://api.openweathermap.org/data/2.5/forecast?q=Warsaw&appid=${APIKey}&units=metric`;
-
-    setWeatherLoading(true);
-    try {
-      const { data } = await axios.get(API);
-      setTemp(data.list[0].main.temp);
-      setDesc(data.list[0].weather[0].main);
-
-      setWeatherLoading(false);
-    } catch (error) {
-      console.log(error);
-      setWeatherLoading(false);
-    }
-  };
-
-  const getNewestPodcast = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get('/api/podcast/newest');
-      setPodcast(data);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
+  useEffect(() => {
+    loadTextContent();
+  });
 
   useEffect(() => {
-    if (!podcast.title) {
-      getNewestPodcast();
-    } else {
-      loadTextContent();
-    }
-    if (!temp || !desc) {
-      getWeather();
-    }
-  }, [podcast]);
-
-  useEffect(() => {
+    window.scrollTo({ top: 0 });
     if (window.innerWidth < 1024) {
       const sections = document.querySelectorAll('.landing .podcast-preview');
       sections.forEach((section) => {

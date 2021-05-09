@@ -1,110 +1,27 @@
 @import 'utils';
 
 .contact {
+  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 4rem);
-  padding: 0 $page_padding_x;
-  background: $main_bg_color;
   color: white;
+
+  * {
+    z-index: 10;
+  }
 
   *:not(i) {
     font-family: $third_font;
   }
 
-  .content {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    align-items: center;
-    transition: all 0.3s ease;
-
-    .crew {
-      display: flex;
-      flex-direction: column;
-
-      .contact-image {
-        width: 10rem;
-      }
-
-      .heading {
-        font-family: $second_font;
-        font-size: 1.75rem;
-        margin-bottom: 3rem;
-        color: white;
-      }
-
-      .person {
-        display: flex;
-        align-items: center;
-        transition: all 0.5s ease;
-
-        &:not(:first-of-type) {
-          margin-top: 2rem;
-        }
-
-        .person-top {
-          display: flex;
-          position: relative;
-        }
-
-        img {
-          width: 4rem;
-          height: 4rem;
-          margin-right: 1rem;
-          object-fit: cover;
-          opacity: 0;
-        }
-
-        .contact-forms {
-          display: flex;
-          flex-direction: column;
-
-          .name {
-            font-size: 0.9rem;
-            font-family: $roboto;
-            margin: 0;
-            color: rgb(83, 83, 83);
-          }
-
-          .basic-contact {
-            margin: 0.1rem 0;
-            font-size: 0.6rem;
-            font-family: $roboto;
-            color: rgb(194, 194, 194);
-          }
-
-          .social-media {
-            margin-top: 0.5rem;
-            a,
-            i {
-              font-size: 0.7rem;
-              margin-right: 0.3rem;
-              color: rgb(190, 194, 197);
-
-              &:hover {
-                color: white;
-              }
-            }
-          }
-
-          .introduction {
-            font-size: 0.55rem;
-            font-family: $second_font;
-            margin: 0.5rem 0;
-          }
-
-          span {
-            font-size: 0.65rem;
-          }
-        }
-      }
-    }
-  }
-
   &.contact-hidden {
+    .section-heading {
+      opacity: 0;
+    }
+
     .content {
       opacity: 0;
     }
@@ -123,10 +40,9 @@
 
 @each $width, $padding in $paddings {
   @media screen and (max-width: $width) {
-    .contact {
+    .contact-info,
+    .message-form {
       padding: 0 $padding;
-      .content {
-      }
     }
   }
 }

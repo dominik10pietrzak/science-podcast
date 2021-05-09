@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import '../styles/message-form.scss';
 
 const MessageForm: React.FC = () => {
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -75,52 +78,66 @@ const MessageForm: React.FC = () => {
 
   return (
     <div className='message-form'>
-      <form className='form-container form-hidden' onSubmit={handleSendMessage}>
-        <h3 className='heading'>Napisz do nas</h3>
-        <p>
-          Interesuje Cię współpraca z nami? Wypełnij formularz i wyślij
-          wiadomość, dotrze ona do nas obu.
-        </p>
-        <div className='form-group'>
-          <div>
-            <label>Imię</label>
-            <input
-              className='text-field'
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete='off'
-            />
-          </div>
-          <div>
-            <label>Nazwisko</label>
-            <input
-              className='text-field'
-              type='text'
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-              autoComplete='off'
-            />
-          </div>
+      <div className='button-wrapper'>
+        <h1 className='podcast-button' onClick={() => history.push('/podcast')}>
+          Przejdź do podcastu
+        </h1>
+      </div>
+      <div className='content'>
+        <div className='heading-box'>
+          <h3 className='heading'>Napisz do nas.</h3>
+          <p>
+            Interesuje Cię współpraca z nami lub jednym z nas? Wypełnij
+            formularz i wyślij wiadomość, dotrze ona do nas obu.
+          </p>
         </div>
-        <label>Email</label>
-        <input
-          className='text-field'
-          type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete='off'
-        />
+        <form
+          className='form-container form-hidden'
+          onSubmit={handleSendMessage}>
+          <div className='form-group'>
+            <div>
+              <label>Imię</label>
+              <input
+                className='text-field'
+                type='text'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                autoComplete='off'
+              />
+            </div>
+            <div>
+              <label>Nazwisko</label>
+              <input
+                className='text-field'
+                type='text'
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                autoComplete='off'
+              />
+            </div>
+          </div>
+          <label>Email</label>
+          <input
+            className='text-field'
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete='off'
+          />
 
-        <label>Wiadomość</label>
-        <textarea
-          className='text-field'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          autoComplete='off'
-        />
-        <button type='submit'>Wyślij</button>
-      </form>
+          <label>Wiadomość</label>
+          <textarea
+            className='text-field'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            autoComplete='off'
+          />
+          <button type='submit'>
+            wyślij
+            <i className='fas fa-arrow-right'></i>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
