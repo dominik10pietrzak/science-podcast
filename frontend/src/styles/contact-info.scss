@@ -2,8 +2,7 @@
 
 .contact-info {
   position: relative;
-  min-height: calc(100vh - 4rem);
-  min-height: calc(100vh);
+  min-height: 100vh;
   width: 100%;
   padding: 0 $page_padding_x;
   padding-bottom: 7rem;
@@ -21,7 +20,7 @@
     object-position: center;
     z-index: 0;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease 0.3s;
   }
 
   .gradient {
@@ -61,12 +60,14 @@
     transition: all 0.3s ease;
 
     .heading-box {
+      width: 22rem;
+
       .heading {
         font-family: $font_poppins;
         font-weight: 700;
         font-size: 2.75rem;
         line-height: 3rem;
-        width: 22rem;
+        width: 100%;
         margin: 0;
         color: white;
       }
@@ -76,7 +77,7 @@
         font-family: $font_poppins;
         line-height: 1.15rem;
         margin-bottom: 2rem;
-        width: 22rem;
+        width: 100%;
       }
 
       .message-button {
@@ -149,6 +150,102 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@each $width, $padding in $paddings {
+  @media screen and (max-width: $width) {
+    .contact-info {
+      padding: 0 $padding;
+      padding-bottom: 7rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 1450px) {
+  .contact-info {
+    .content {
+      .crew {
+        .person {
+          margin-left: 3rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .contact-info {
+    padding-bottom: 5rem;
+
+    .content {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .heading-box {
+        margin-bottom: 3rem;
+      }
+
+      .crew {
+        .person {
+          margin-left: 0;
+          margin-right: 3rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .contact-info {
+    padding-bottom: 5rem;
+
+    .gradient {
+      background: linear-gradient(
+        to bottom,
+        rgba(black, 0.5),
+        rgba(black, 0.7),
+        rgba(black, 0.9),
+        rgba(black, 1)
+      );
+    }
+
+    .content {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .heading-box {
+        margin-bottom: 1rem;
+        width: 100%;
+
+        .heading {
+          font-size: 2.25rem;
+        }
+      }
+
+      .crew {
+        .person {
+          margin-left: 0;
+          margin-right: 3rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  .contact-info {
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+    height: fit-content;
+
+    .crew {
+      flex-direction: column;
+      .person {
+        margin: 0;
+        margin-top: 2rem;
       }
     }
   }

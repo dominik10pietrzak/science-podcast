@@ -76,13 +76,15 @@ const PodcastList: React.FC<{ history: any }> = ({ history }) => {
           <div className='main' onLoad={fadeInList}>
             {podcasts[0] && !keyword ? (
               <div className='newest-podcast'>
-                <div className='main-cover'>
-                  <img
-                    className='main-cover'
-                    src={podcasts[0].cover}
-                    alt='cover'
-                    onLoad={(e) => loadImage(e.target)}
-                  />
+                <div>
+                  <div className='main-cover'>
+                    <img
+                      className='main-cover-image'
+                      src={podcasts[0].cover}
+                      alt='cover'
+                      onLoad={(e) => loadImage(e.target)}
+                    />
+                  </div>
                 </div>
                 <div className='newest-podcast-data'>
                   <h1>{podcasts[0].title}</h1>

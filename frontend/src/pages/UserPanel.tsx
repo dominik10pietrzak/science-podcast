@@ -177,22 +177,22 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
                           ).length
                         : 0}
                     </p>
-                    <span>Polubione podcasty</span>
+                    <span className='stats-name'>Polubione podcasty</span>
                   </div>
                   <div className='line'></div>
                   <div className='stats-child'>
                     <p className='stats-number'>
                       {user?.writtenCommentsNumber}
                     </p>
-                    <span>Napisane komentarze</span>
+                    <span className='stats-name'>Napisane komentarze</span>
                   </div>
                 </div>
                 <div className='user-info-container'>
-                  <p>
+                  <p className='user-info-name'>
                     <i className='far fa-user'></i>
                     {user?.first_name} {user?.last_name}
                   </p>
-                  <p>
+                  <p className='user-info-name'>
                     <i className='fas fa-envelope-square'></i>
                     {user.email}
                   </p>
