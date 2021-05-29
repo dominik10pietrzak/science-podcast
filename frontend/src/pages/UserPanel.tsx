@@ -35,16 +35,15 @@ const UserPanel: React.FC<{ history: any }> = ({ history }) => {
   const { userInfo } = userLogin;
 
   const podcastList = useSelector((state: RootStateOrAny) => state.podcastList);
-  const { podcasts, loading: loadingPodcasts } = podcastList;
+  const { podcasts } = podcastList;
 
   useEffect(() => {
     (document.querySelector('.navbar') as HTMLElement).classList.add('static');
-    console.log(user);
 
     if (!userInfo || !userInfo.id) {
       history.push('/login');
     } else {
-      if (!user || !user.name || success || userInfo.id !== user.id) {
+      if (!user || success || userInfo.id !== user.id) {
         dispatch({ type: 'USER_UPDATE_PROFILE_RESET' });
         dispatch(getUserDetails('profile'));
       } else {

@@ -21,7 +21,6 @@ export const podcastListReducer = (
       return { loading: true, podcasts: [] };
 
     case 'PODCAST_LIST_SUCCESS':
-      console.log(action.payload);
       return {
         ...state,
         loading: false,
